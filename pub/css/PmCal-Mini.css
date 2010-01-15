@@ -1,0 +1,417 @@
+/**************************************************************************
+* HIGH LEVEL ELEMENTS
+***************************************************************************/
+
+/* The encompassing Table, holds the monthtitle, dayofweektitles and
+* daynumber Cells
+*/
+table.pmcal  {
+	width:28%;
+	border:1px solid #bbbbbb;
+	border-spacing:0px;
+	background:#eeeeee;
+	vertical-align:top;
+}
+
+
+/**************************************************************************
+* TITLE CELL ELEMENTS
+***************************************************************************/
+
+/* The Cells used for the days of the week, e.g. Sun, Mon, Tue,...
+*/
+table.pmcal td.pmcaldayofweektitle {
+	border:1px solid #bbbbbb;
+	background:#ffffff;
+	text-align:center;
+}
+
+/* The Cell the spans across the top holding the Month name.
+*/
+table.pmcal td.pmcalmonthtitle {
+	border:none;
+	background:#ffffff;
+	text-align:center;
+	padding:0px;
+}
+
+table.pmcal span.pmcalnavlinks {
+	font-size:10pt;
+}
+
+/**************************************************************************
+* TITLE CELL SPECIFIC ELEMENTS
+***************************************************************************/
+
+table.pmcal td.pmcaldayofweektitle p {
+	font-size:6pt;
+	font-family:sans-serif;
+}
+
+table.pmcal td.pmcalmonthtitle p {
+	font-size:12pt;
+	font-weight:bold;
+	font-style:italic;
+}
+
+table.pmcal td.pmcalmonthtitle a.wikilink {
+	text-decoration:none;
+	right:0px;
+}
+
+
+
+/**************************************************************************
+* DAY CELL ELEMENTS
+***************************************************************************/
+
+/* Cells used for filler at beginning and/or end of the month.
+*/
+table.pmcal td.pmcalnull {
+	border:none;
+}
+
+/* Cells holding daynumbers for the month.  This also will have the
+* included text from the wiki page for the day.
+*/
+table.pmcal td.pmcalday * {
+	font-size:0pt;
+}
+table.pmcal td.pmcalday {
+	border-right:2px solid #ddddaa;
+	border-bottom:2px solid #ddddaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	background:#ffffcc;
+	padding:0px;
+	width:14%;
+	height:20px;
+	vertical-align:top;
+	font-weight:normal;
+	margin:0px;
+}
+
+/* Single Cell holding daynumbers for today.  This also will have the
+* included text from the wiki page for today.
+*/
+table.pmcal td.pmcaltoday {
+	border-right:2px solid #aaddaa;
+	border-bottom:2px solid #aaddaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	background:#ccffcc;
+	padding:0px;
+	width:14%;
+	height:20px;
+	vertical-align:top;
+	font-weight:normal;
+	margin:0px;
+}
+
+/**************************************************************************
+* DAY CELL SPECIFIC ELEMENTS
+***************************************************************************/
+
+
+/*
+* Normal Days  See pmcalday above. 
+*/
+
+table.pmcal td.pmcalday  {
+	font-size:6pt;
+	list-style-type:none;
+}
+/*
+table.pmcal td.pmcalday li,h1,h2,h3,h4 {
+	display:none;
+	position:relative;
+	left:-25px;
+}
+*/
+
+
+table.pmcal td.pmcalday:hover {
+	background:#ffffdd;
+}
+
+table.pmcal td.pmcalday a.selflink {
+	text-decoration:none;
+	border:1px solid #000000;
+	background:#995555;
+	color:#ffffff;
+	border-style:outset;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+table.pmcal td.pmcalday a.createlinktext {
+	font-size:6pt;
+	text-decoration:none;
+	border:none;
+}
+
+/* Very specific day elements */
+table.pmcal td.pmcalday span.pmcaldaynumber {
+	font-size:6pt;
+	font-family:sans-serif;
+	text-decoration:none;
+}
+
+/*
+* MSIE hates this stuff
+* td.pmcalday span.pmcaldaynumber >a.wikilink {
+*	font-size:12pt;
+*	font-family:sans-serif;
+*	text-decoration:none;
+*	border:1px solid #000000;
+*	background:#ffffff;
+*	border-style:outset;
+*	padding-left:3px;
+*	padding-right:3px;
+*}
+*
+*td.pmcalday span.pmcaldaynumber >a.createlink {
+*	display:none;
+*}
+*/
+
+table.pmcal span.pmcaldaynumber a.wikilink {
+	font-size:6pt;
+	font-family:sans-serif;
+	text-decoration:none;
+	border:1px solid #000000;
+	background:#ffffff;
+	border-style:outset;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+table.pmcal span.pmcaldaynumber a.createlink {
+	display:none;
+}
+
+
+/*
+* Today  See pmcaltoday above. 
+*/
+
+table.pmcal td.pmcaltoday  {
+	font-size:6pt;
+}
+
+table.pmcal td.pmcaltoday li {
+	position:relative;
+	left:-25px;
+}
+
+table.pmcal td.pmcaltoday:hover {
+	background:#ddffdd;
+}
+
+table.pmcal td.pmcaltoday a.selflink {
+	text-decoration:none;
+	font-weight:bold;
+	border:1px solid #000000;
+	background:#995555;
+	color:#ffffff;
+	border-style:outset;
+}
+
+table.pmcal td.pmcaltoday a.createlinktext {
+	font-size:6pt;
+	text-decoration:none;
+	border:none;
+}
+
+/* Very specific today elements */
+
+/*
+* MSIE hates this stuff
+* td.pmcaltoday span.pmcaldaynumber >a.wikilink {
+*	font-size:12pt;
+*	font-weight:bold;
+*	font-family:sans-serif;
+*	text-decoration:none;
+*	border:1px solid #000000;
+*	background:#ffffff;
+*	border-style:outset;
+*	padding-left:3px;
+*	padding-right:3px;
+* }
+*
+* td.pmcaltoday span.pmcaldaynumber >a.createlink {
+* 	display:none;
+* }
+*/
+
+table.pmcal span.pmcaldaynumber a.wikilink {
+	font-size:6pt;
+	font-weight:bold;
+	font-family:sans-serif;
+	text-decoration:none;
+	border:1px solid #000000;
+	background:#ffffff;
+	border-style:outset;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+table.pmcal span.pmcaldaynumber a.createlink {
+	display:none;
+}
+
+table.pmcal td.pmcaltoday span.pmcaldaynumber {
+	font-size:6pt;
+	font-weight:bold;
+	font-family:sans-serif;
+}
+
+
+/**************************************************************************
+* OTHER ELEMENTS
+***************************************************************************/
+
+/* The today link to take you today */
+span.pmcaltodaylink {
+	display:none;
+	position:relative;
+	top:10px;
+	border-right:2px solid #aaddaa;
+	border-bottom:2px solid #aaddaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	font-style:bold;
+	font-size:8pt;
+	padding:5px;
+	background:#ccffcc;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+span.pmcaltodaylink a {
+	text-decoration:none;
+	font-family:sans-serif;
+}
+
+span.pmcaldaytextlink a {
+	display:block;
+	border-right:2px solid #cccc99;
+	border-bottom:2px solid #cccc99;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	text-decoration:none;
+	font-family:sans-serif;
+}
+
+span.pmcaltodaytextlink a {
+	display:block;
+	text-decoration:none;
+	font-family:sans-serif;
+	background:#ccffcc;
+	border-right:2px solid #aaddaa;
+	border-bottom:2px solid #aaddaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+}
+
+/**************************************************************************
+* OTHER CALENDARS
+* All other calendar includes link have a pmcalincludelink
+* class and the entries are pmcalinclude.
+*
+* If there's a pmcal at Holidays/Holidays, those entries will
+* be included on your calendar if you specify (:pmcal cals=Holidays:)
+* Below is CSS for the pmcalincludeHolidays and pmcalincludeHolidayslink.
+***************************************************************************/
+
+table.pmcal span.pmcalinclude {
+	display:block;
+	background:#ddddaa;
+}
+
+table.pmcal span.pmcalinclude a {
+	display:block;
+	text-decoration:none;
+	text-transform:uppercase;
+	font-family:sans-serif;
+}
+
+span.pmcalincludelink {
+	display:none;
+	position:relative;
+	top:10px;
+	border-right:2px solid #cccc99;
+	border-bottom:2px solid #cccc99;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	font-style:bold;
+	font-size:8pt;
+	padding:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	background:#ddddaa;
+}
+
+span.pmcalincludelink a {
+	text-decoration:none;
+	text-transform:uppercase;
+	font-family:sans-serif;
+}
+
+span.pmcalincludetextlink a {
+	display:block;
+	border-right:2px solid #cccc99;
+	border-bottom:2px solid #cccc99;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	text-decoration:none;
+	font-family:sans-serif;
+	background:#ddddaa;
+}
+
+table.pmcal span.pmcalincludeHolidays {
+	display:block;
+	background:#ffcccc;
+}
+
+table.pmcal span.pmcalincludeHolidays a {
+	display:block;
+	text-decoration:none;
+	text-transform:uppercase;
+	font-family:sans-serif;
+}
+
+table.pmcal span.pmcalincludeHolidayslink {
+	position:relative;
+	top:10px;
+	border-right:2px solid #ddaaaa;
+	border-bottom:2px solid #ddaaaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	font-style:bold;
+	font-size:8pt;
+	padding:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	background:#ffcccc;
+}
+table.pmcal span.pmcalincludeHolidayslink a {
+	text-decoration:none;
+	text-transform:uppercase;
+	font-family:sans-serif;
+}
+
+span.pmcalincludeHolidaystextlink a {
+	border-right:2px solid #ddaaaa;
+	border-bottom:2px solid #ddaaaa;
+	border-left:2px solid #ffffff;
+	border-top:2px solid #ffffff;
+	text-decoration:none;
+	font-family:sans-serif;
+	background:#ffcccc;
+}
+
+table.pmcal #pmcalzebra {
+	background:#eeeeee;
+}
+
