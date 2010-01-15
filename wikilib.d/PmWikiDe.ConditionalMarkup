@@ -1,0 +1,12 @@
+version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+author=Stephan Schwarzbold
+csum=
+ctime=1162909193
+host=212.80.246.17
+name=PmWikiDe.ConditionalMarkup
+rev=6
+targets=PmWiki.ConditionalMarkup,Profiles.StephanSchwarzbold
+text=(:title zusätzliche Auszeichnungen - leere Seite:)%0a%0a[-%25green%25 die Seite [[PmWiki.{$Name}]] is hierhinein zu übersetzen, Stand 2007-03-04-]%0a%0a%0aDer Seitentitel ist nur ein Arbeitstitel.  [-- [[~Stephan Schwarzbold]] 04.03.2007 13:32 Uhr --]%0a
+time=1173036771
+title=zusätzliche Auszeichnungen - leere Seite

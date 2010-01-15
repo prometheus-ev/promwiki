@@ -1,0 +1,11 @@
+version=pmwiki-2.2.0-beta35 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+author=
+csum=
+ctime=1155039926
+host=213.173.180.166
+name=PmWikiDe.WikiSandbox
+rev=298
+targets=GroupOne.GroupOne,GroupOne.Page1,GroupOne.Page2,GroupOne.Page3,GroupTwo.GroupTwo,GroupTwo.Page4,GroupTwo.Page5,GroupTwo.Page6,PmWiki.Installation,PmWiki.TipsForEditing,PmWiki.DocumentationIndex,PmWiki.FAQ
+text=*[[GroupOne/GroupOne]] (:if group GroupOne:)%0a**[[GroupOne/Page1]]%0a**[[GroupOne/Page2]]%0a**[[GroupOne/Page3]] (:if:)%0a*[[GroupTwo/GroupTwo]] (:if group GroupTwo:)%0a**[[GroupTwo/Page4]]%0a**[[GroupTwo/Page5]]%0a**[[GroupTwo/Page6]] (:if:)%0a*PmWiki (:if group PmWiki:)%0a** [[PmWiki/Installation | Download and Install]]%0a** [[PmWiki/Tips For Editing]]%0a** [[PmWiki/Documentation Index]]%0a** [[PmWiki/FAQ]] (:if:)%0a
+time=1173709480

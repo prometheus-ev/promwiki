@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2007 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -21,28 +21,34 @@ global $HTTPHeaders, $KeepToken, $pagename,
   $PageNameChars, $MakePageNamePatterns, $CaseConversions, $Charset;
 
 $Charset = 'UTF-8';
-$HTTPHeaders[] = 'Content-type: text/html; charset=UTF-8';
-$pagename = $_REQUEST['n'];
-if (!$pagename) $pagename = $_REQUEST['pagename'];
+$HTTPHeaders['utf-8'] = 'Content-type: text/html; charset=UTF-8';
+$HTMLHeaderFmt['utf-8'] = 
+  "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+$pagename = @$_REQUEST['n'];
+if (!$pagename) $pagename = @$_REQUEST['pagename'];
 if (!$pagename &&
       preg_match('!^'.preg_quote($_SERVER['SCRIPT_NAME'],'!').'/?([^?]*)!',
           $_SERVER['REQUEST_URI'],$match))
     $pagename = urldecode($match[1]);
 $pagename = preg_replace('!/+$!','',$pagename);
+$FmtPV['$RequestedPage'] = "'".htmlspecialchars($pagename, ENT_QUOTES)."'";
 
 $GroupPattern = '[\\w\\x80-\\xfe]+(?:-[[\\w\\x80-\\xfe]+)*';
 $NamePattern = '[\\w\\x80-\\xfe]+(?:-[[\\w\\x80-\\xfe]+)*';
 $WikiWordPattern = 
   '[A-Z][A-Za-z0-9]*(?:[A-Z][a-z0-9]|[a-z0-9][A-Z])[A-Za-z0-9]*';
-$SuffixPattern = '(?:-?[[:alnum:]\\x80-\\xd6]+)*';
+$SuffixPattern = '(?:-?[A-Za-z0-9\\x80-\\xd6]+)*';
 
 SDV($PageNameChars, '-[:alnum:]\\x80-\\xfe');
 SDV($MakePageNamePatterns, array(
+    '/[?#].*$/' => '',                     # strip everything after ? or #
     "/'/" => '',                           # strip single-quotes
     "/[^$PageNameChars]+/" => ' ',         # convert everything else to space
-    "/(?<=^| )([a-z])/e" => "strtoupper('$1')", 
-    "/(?<=^| )([\\xc0-\\xdf].)/e" => "utf8toupper('$1')", 
-    "/ /" => ''));
+    '/(?<=^| )([a-z])/e' => "strtoupper('$1')", 
+    '/(?<=^| )([\\xc0-\\xdf].)/e' => "utf8toupper('$1')", 
+    '/ /' => ''));
+
+$AsSpacedFunction = 'AsSpacedUTF8';
 
 function utf8toupper($x) {
   global $CaseConversions;
@@ -54,6 +60,21 @@ function utf8toupper($x) {
   }
   return str_replace($lower, $upper, $x);
 }
+
+
+function AsSpacedUTF8($text) {
+  global $CaseConversions;
+  static $lower, $upper;
+  if (!@$CaseConversions) return AsSpaced($text);
+  if (!@$lower) {
+    $lower = implode('|', array_keys($CaseConversions));
+    $upper = implode('|', array_values($CaseConversions));
+  }
+  $text = preg_replace("/($lower|\\d)($upper)/", '$1 $2', $text);
+  $text = preg_replace('/(?<![-\\d])(\\d+( |$))/', ' $1', $text);
+  return preg_replace("/($upper)(($upper)($lower|\\d))/", '$1 $2', $text);
+}
+
 
 SDV($CaseConversions, array(
   'a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D', 'e' => 'E', 'f' => 'F',
@@ -88,7 +109,7 @@ SDV($CaseConversions, array(
   "\xc4\xa3" => "\xc4\xa2",  "\xc4\xa5" => "\xc4\xa4",
   "\xc4\xa7" => "\xc4\xa6",  "\xc4\xa9" => "\xc4\xa8",
   "\xc4\xab" => "\xc4\xaa",  "\xc4\xad" => "\xc4\xac",
-  "\xc4\xaf" => "\xc4\xae",  "\xc4\xb1" => "\x49\x00",
+  "\xc4\xaf" => "\xc4\xae",  "\xc4\xb1" => "I",
   "\xc4\xb3" => "\xc4\xb2",  "\xc4\xb5" => "\xc4\xb4",
   "\xc4\xb7" => "\xc4\xb6",  "\xc4\xba" => "\xc4\xb9",
   "\xc4\xbc" => "\xc4\xbb",  "\xc4\xbe" => "\xc4\xbd",
@@ -107,7 +128,7 @@ SDV($CaseConversions, array(
   "\xc5\xb1" => "\xc5\xb0",  "\xc5\xb3" => "\xc5\xb2",
   "\xc5\xb5" => "\xc5\xb4",  "\xc5\xb7" => "\xc5\xb6",
   "\xc5\xba" => "\xc5\xb9",  "\xc5\xbc" => "\xc5\xbb",
-  "\xc5\xbe" => "\xc5\xbd",  "\xc5\xbf" => "\x53\x00",
+  "\xc5\xbe" => "\xc5\xbd",  "\xc5\xbf" => "S",
   "\xc6\x83" => "\xc6\x82",  "\xc6\x85" => "\xc6\x84",
   "\xc6\x88" => "\xc6\x87",  "\xc6\x8c" => "\xc6\x8b",
   "\xc6\x92" => "\xc6\x91",  "\xc6\x95" => "\xc7\xb6",

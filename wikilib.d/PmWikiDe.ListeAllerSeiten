@@ -1,0 +1,11 @@
+version=pmwiki-2.2.0-beta21 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Avant Browser; .NET CLR 2.0.50727)
+author=Stephan Schwarzbold
+csum=Antwort auf Commentar
+host=141.54.174.149
+name=PmWikiDe.ListeAllerSeiten
+rev=13
+targets=
+text=(:title Liste aller deutschen Seiten:)%0aÜbersicht der Seiten der deutschen Übersetzung. Zuletzt bearbeitete Seiten befinden sich unten, potentiell überarbeitungswürdige Seiten am Anfang der Liste.%0a%0a(:pagelist group=PmWikiDe fmt=#title order=time list=normal:)%0a%0a%25comment%25Warum ist die Seite eigentlich nicht in alphabetischer Reihenfolge und sondern in last Change? und Warum wenn schon so, die neuesten am Schluss ??%0a%0a%25comment%25?? %0a%0a%25comment%25Meine Frage zielte darauf ab, ob es möglich solche von pmwiki erzeugten Indexe auch anders auszugeben und wenn es möglich ist, warum dann Dieser in einer eigentlich so dämlichen Sortierung vorliegt.
+time=1168660236
+title=Liste aller deutschen Seiten

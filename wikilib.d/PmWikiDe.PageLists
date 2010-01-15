@@ -1,0 +1,12 @@
+version=pmwiki-2.2.0-beta15 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)
+author=Stephan Schwarzbold
+csum=
+ctime=1136279075
+host=141.54.174.156
+name=PmWikiDe.PageLists
+rev=6
+targets=
+text=(:title Seitenlisten:)%0a%0a(:redirect PmWiki/PageLists:)
+time=1161142396
+title=Seitenlisten

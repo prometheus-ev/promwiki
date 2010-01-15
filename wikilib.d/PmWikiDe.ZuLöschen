@@ -1,0 +1,11 @@
+version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+author=Stephan Schwarzbold
+csum=Seite hinzugefügt
+host=134.109.73.73
+name=PmWikiDe.ZuLöschen
+rev=54
+targets=PmWiki.GoodStyle,PmWikiDe.GuterStil,PmWiki.Internationalizations,PmWikiDe.Internationalisierungen,PmWiki.LayoutBasics,PmWikiDe.LayoutGrundlagen,PmWiki.PasswordsAdmin,PmWikiDe.AdministratorPasswörter,PmWiki.WikiStructure,PmWikiDe.WikiStruktur,Pmwiki.Wikipage,PmWikiDe.WikiSeite,PmWikiDe.DocumentationIndex
+text=(:title Seiten die gelöscht werden sollten:)%0aHier ist eine Liste von Dateien, die gelöscht werden sollten bzw. umgesetzt werden sollten.%0a%0aDiese stehen hier nur nochmal als Backup, bis die neuen (aktuellen) Übersetzungen fertig sind. Hintergrund: Die Dateinamen sollten den Orginalen von `PmWiki entsprechen. Als Hilfe für die deutschen Anwender muss dann jedoch in der ersten Zeile ein deutscher Titel mit [@(:title ... :)@] definiert werden. Sie sollten aber erst hier auftauchen, wenn der Ersatz bereits erstellt wurde.%0a%0aEndgültig gelöschte Seiten bitte aus der Liste rausnehmen.%0a----%0azu löschen (Übernommen aus dem vor 2.0 Stand der Seite StandDerÜbersetzung):%0a|| width=100%25 border=3 cellspacing=0 cellpadding=3 align=center bordercolor=Blue	&nbsp;%0a||%25bgcolor=Yellow%25'''Üb'''%25%25||%25bgcolor=Yellow%25'''Ver'''%25%25||%25bgcolor=Yellow%25'''English'''%25%25||%25bgcolor=Yellow%25'''PmWikiDe'''%25%25 ||%0a||F||U||[[PmWiki.GoodStyle]]              ||[[Guter Stil]]||%0a||F||U||[[PmWiki.Internationalizations]]||[[Internationalisierungen]]||%0a||F||S||[[PmWiki.LayoutBasics]]           ||[[Layout Grundlagen]]  ||%0a||F||A||[[PmWiki.PasswordsAdmin]]     ||[[Administrator Passwörter]]||%0a||V||U||[[PmWiki.WikiStructure]]          ||[[WikiStruktur]] - Ersatz steht|| %0a||V|| ||                              ||SonderZeichensätze||%0a|| || ||[[pmwiki.wikipage]]||[[WikiSeite]] - neue Seite steht - Linksanpassen!||%0a%0a%25trail%25%3c%3c|[[PmWikiDe.DocumentationIndex|Dokumentationsindex]]|>>
+time=1173023810
+title=Seiten die gelöscht werden sollten

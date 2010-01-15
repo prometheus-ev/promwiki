@@ -1,0 +1,11 @@
+version=pmwiki-2.1.2 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; U; Linux i686; de; rv:1.8.0.1) Gecko/20060124 Firefox/1.5.0.1
+author=
+csum=
+host=83.76.150.88
+name=PmWikiDe.InterMap
+rev=15
+targets=PmWiki.InterMap,PmWiki.Variables,PmWikiDe.CustomInterMap,PmWikiDe.DocumentationIndex
+text=(:title InterMap Präfixe:)%0a%25audience%25 Autoren (Fortgeschritten)%0a[-%25green%25(deutsche Übersetzung der Seite [[PmWiki.{$Name}]], Stand 07.09.2005)-]%0a%0aMit 'InterMap' wird ein System zum Verweisen zwischen verschiedenen WikiWikiWeb-Webseiten bezeichnet. Es wurde ursprünglich durch UseMod:UseModWiki und Meatball:MeatballWiki entwickelt. InterMap-Präfixe haben die Form [@MapPrefix:Page@], wobei der vorangestellte Hostname ([@MapPrefix@]) in einen Teil der Internetadresse umgewandelt wird. Diese Umwandlung beruht auf den Einträgen in den Dateien''intermap.txt'' und ''localmap.txt''.%0a%0aDie standardmäßig in PmWiki enthaltene ''intermap.txt'' enthält die folgenden Einträge für InterMap-Präfixe:%0a%0a    [=%0a    PmWiki          http://www.pmwiki.org/pmwiki2/pmwiki.php/%0a    Cookbook        http://www.pmwiki.org/pmwiki2/pmwiki.php/Cookbook/%0a    Wiki            http://www.c2.com/cgi/wiki?%0a    UseMod          http://www.usemod.com/cgi-bin/wiki.pl?%0a    Meatball        http://www.usemod.com/cgi-bin/mb.pl?%0a    Wikipedia       http://www.wikipedia.com/wiki/%0a    Path%0a    =]%0a%0aDamit wird PmWiki:Variables zu einem Verweis zu der Seite [[PmWiki.Variables]] auf der offiziellen PmWiki-Webseite. Wikipedia:Stonehenge führt Sie auf den Wikipedia-Artikel über die berühmten Steinformationen in England.%0a%0aDer besondere [@Path:@] InterMap-Präfix kann für relative Internetadressen in Verweise verwendet werden.%0a%0aDie aktuell verfügbaren InterMap-Präfixe der lokalen PmWiki-Installation werden vom Administrator vordefiniert. Genaueres ist hierzu unter [[PmWikiDe.Custom InterMap|InterMap anpassen]] zu finden.%0a%0a%25trail%25%3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>%0a
+time=1142546029
+title=InterMap Präfixe

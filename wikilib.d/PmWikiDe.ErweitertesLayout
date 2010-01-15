@@ -1,0 +1,10 @@
+version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+author=Stephan Schwarzbold
+csum=Löschanfrage
+host=212.80.246.17
+name=PmWikiDe.ErweitertesLayout
+rev=2
+targets=Profiles.StephanSchwarzbold
+text=%25note%25 Müll?? [[~Stephan Schwarzbold]] 04.03.2007 11:39 Uhr%0a%0a%0ahjkljhklj%0a----%0a* eins%0a* zwei%0a----%0a! Ueberschrift1%0a!! Ueberschrift2%0a!!! Ueberschrift3%0a----%0a# eins%0a# zwei%0a# drei%0a----%0a:eins:eins%0a----%0a->'''Schreibmaschine'''%0a----%0a%0a%0a%0a
+time=1173029973

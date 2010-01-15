@@ -1,0 +1,10 @@
+version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+author=Stephan Schwarzbold
+csum=
+host=134.109.73.73
+name=PmWikiDe.WikiSeite
+rev=6
+targets=PmWikiDe.WikiStructure
+text=Eine WikiSeite ist der Grundbaustein eines WikiWikiWeb und enthält Text und Bilder.%0a%0aMehr Information darüber bei [[WikiStructure|+]] und WikiWikiWebWikiWiki. %0a%0a%25trail%25 %3c%3c|PmWikiDe.DokumentationsIndex|>>
+time=1173022637

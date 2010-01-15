@@ -1,0 +1,11 @@
+version=pmwiki-2.1.5 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3
+author=
+csum=restore
+host=195.186.219.178
+name=PmWikiDe.Security
+rev=4
+targets=PmWiki.Security,PmWikiDe.Passwords,PmWikiDe.PasswordsAdmin,PmWikiDe.UrlApprovals,PmWikiDe.DocumentationIndex
+text=(:title Sicherheit:)%0a%0a[-%25green%25(deutsche Übersetzung der Seite [[PmWiki.{$Name}]], Stand 29.09.2005)-]%0a%0aDokumentationsseiten:%0a*[[PmWikiDe.Passwords]] - Allgemeiner Gebrauch von Passwörtern%0a*[[PmWikiDe.PasswordsAdmin]] - Weitere Passwortoptionen für den Administrator%0a*[[PmWikiDe.UrlApprovals]] - Einfordern einer Freigabe für URL-Verweise%0a%0aCookbook-Seiten:%0a* Siehe auch [[Cookbook:Cookbook#Security | Cookbook-Index: Sicherheit]]%0a*[[Cookbook:Blocklist2]] Sperren von Bearbeitungen auf Grund des Inhaltes oder der IP Adresse%0a*[[Cookbook:MTBlackList]] Movable Type Spam Blacklist%0a*[[Cookbook:WebServerSecurity]] Schutz des Servers durch .htaccess%0a*[[Cookbook:FarmSecurity]] Schutz von Farminstallationen%0a*[[Cookbook:EProtect]] Schutz von Emailadressen%0a*[[Cookbook:AuditImages]] Kontrolle mittels Übersicht der ins Wiki hochgeladenen Dateien%0a%0a%25trail%25%3c%3c|[[DocumentationIndex | Dokumentationsindex]]|>>%0a
+time=1147787474
+title=Sicherheit

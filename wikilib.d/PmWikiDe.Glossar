@@ -1,0 +1,10 @@
+version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+author=Stephan Schwarzbold
+csum=
+host=134.109.73.73
+name=PmWikiDe.Glossar
+rev=4
+targets=PmWikiDe.Direktiven,PmWikiDe.DocumentationIndex
+text=[[#Markup]]%0a:'''Markup''':Besondere Zeichenketten im Quelltext einer Wikiseite, die nicht wie normaler Text dargestellt werden, sondern von der Wikisoftware als Anweisungen interpretiert werden. Beispielsweise werden Markups verwendet, um Text in bestimmter Weise "auszuzeichnen": \\%0a@@[='''Text'''=]@@ wird als fetter '''Text''' dargestellt und \\%0a@@[=%25color=red%25 Text %25%25=]@@ führt dazu, dass %25color=red%25Text%25%25 rot dargestellt wird. \\%0aAuch die Zeichenkette @@[=(:include WikiSeite:)=]@@ ist ein Markup (vgl. [[Direktiven#include | Beschreibung der (:include:)-Direktive]]). \\%0aEine Übersicht über die verschiedenen Markup-Möglichkeiten bietet der MarkupMasterIndex.%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
+time=1173019723
