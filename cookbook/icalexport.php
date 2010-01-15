@@ -132,7 +132,7 @@ function icalexportfct($pagename) {
 		// we read the page and ...
 		$rcpage = ReadPage($pagename);
 		// ... split the events apart on horizontal ruler
-		$calenderEvents = explode("----", utf8_decode($rcpage['text']));
+		$calenderEvents = explode("----", utf8_encode($rcpage['text']));
 
 		foreach ($calenderEvents as $eventNumber => $event) {
 			if (preg_match("/^(?:!!)(?!!)\s?(.*)/m", $event, $eventTitle)) {
