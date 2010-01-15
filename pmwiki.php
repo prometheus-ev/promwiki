@@ -941,7 +941,7 @@ function CondText($pagename,$condspec,$condtext) {
 }
 
 
-function IncludeText($pagename, $inclspec) {
+function IncludeText($pagename, $inclspec, $fpltemplate=false) {
   global $MaxIncludes, $InclCount;
   SDV($MaxIncludes,50);
   $npat = '[[:alpha:]][-\\w]*';
@@ -963,11 +963,21 @@ function IncludeText($pagename, $inclspec) {
         @list($x, $aa, $dots, $b, $bb) = $m;
         if (!$dots && !$b) $bb = $npat;
         if ($aa)
-          $itext=preg_replace("/^.*?\n([^\n]*\\[\\[#$aa\\]\\])/s",
-                              '$1', $itext, 1);
+          if ($fpltemplate) {
+            $itext=preg_replace("/^.*?\n([^\n]*\\[\\[#$aa\\]\\])/s",
+                                '$1', $itext, 1);
+          }
+          else {
+            $itext=preg_replace("/^.*?\\[\\[#$aa\\]\\]/s", '', $itext, 1);
+          }
         if ($bb)
-          $itext=preg_replace("/(\n)[^\n]*\\[\\[#$bb\\]\\].*$/s",
-                              '$1', $itext, 1);
+          if ($fpltemplate) {
+            $itext=preg_replace("/(\n)[^\n]*\\[\\[#$bb\\]\\].*$/s",
+                                '$1', $itext, 1);
+          }
+          else {
+            $itext=preg_replace("/\\[\\[#$bb\\]\\].*$/s", '', $itext, 1);
+          }
       }
       continue;
     }
