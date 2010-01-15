@@ -134,6 +134,8 @@ function icalexportfct($pagename) {
 		// ... split the events apart on horizontal ruler
 		$calenderEvents = explode("----", utf8_encode($rcpage['text']));
 
+    $acalYear = date("Y", $rcpage['ctime']);
+
 		foreach ($calenderEvents as $eventNumber => $event) {
 			if (preg_match("/^(?:!!)(?!!)\s?(.*)/m", $event, $eventTitle)) {
 				preg_match("/^(?:".$endi18n.":)\s*([0-9]{2}:[0-9]{2}).*$/m", $event, $eventEnd);
@@ -149,7 +151,12 @@ function icalexportfct($pagename) {
 				$eventDescription = str_replace("\\", "", $eventDescription[1]);
 
 				$temp = explode(".", $pagename);
-				$out[] = "BEGIN:VEVENT\n";
+        $out[] = "BEGIN:VEVENT\n";
+
+        if (preg_match("/^ACAL/", $temp[1])) {
+          $temp[1] = str_replace("ACAL", date("Y", $acalYear), $temp[1]);
+          $out[] = "RRULE:FREQ=YEARLY;INTERVAL=1\n";
+        }
 
 				if ($eventBegin && $eventEnd) {
 					$beginn = str_replace(":", "", $eventBegin);
