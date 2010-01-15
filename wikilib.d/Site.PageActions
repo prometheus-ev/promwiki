@@ -6,5 +6,5 @@ host=24.1.26.255
 name=Site.PageActions
 rev=23
 targets=Site.PageActions
-text=* %25item class=browse accesskey='$[ak_view]'%25[[{$FullName} | $[View] ]]%0a* %25item rel=nofollow class=edit accesskey='$[ak_edit]'%25[[{$FullName}?action=edit | $[Edit] ]]%0a* %25item rel=nofollow class=diff accesskey='$[ak_history]'%25[[{$FullName}?action=diff | $[History] ]]%0a(:if auth upload:)%0a* %25item rel=nofollow class=upload accesskey='$[ak_attach]'%25[[{$FullName}?action=upload | $[Attach] ]]%0a(:if:)%0a* %25item rel=nofollow class=print accesskey='$[ak_print]'%25[[{$FullName}?action=print | $[Print] ]]
+text=* %25item class=browse accesskey='$[ak_view]'%25[[{$FullName} | $[View] ]]%0a* %25item rel=nofollow class=edit accesskey='$[ak_edit]'%25[[{$FullName}?action=edit | $[Edit] ]]%0a* %25item rel=nofollow class=diff accesskey='$[ak_history]'%25[[{$FullName}?action=diff | $[History] ]]%0a(:if auth upload:)%0a* %25item rel=nofollow class=upload accesskey='$[ak_attach]'%25[[{$FullName}?action=upload | $[Attach] ]]%0a(:if:)%0a* %25item rel=nofollow class=backlinks accesskey='$[ak_print]'%25[[{$Name}?action=search&q=link={$FullName} | $[Backlinks] ]]%0a* %25item rel=nofollow class=print accesskey='$[ak_print]'%25[[{$FullName}?action=print | $[Print] ]]
 time=1142198002
