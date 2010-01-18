@@ -13,7 +13,7 @@ $FmtPV['$BaseUrl'] = '$GLOBALS["BaseUrl"]';
 
 ##  $ScriptUrl is your preferred URL for accessing wiki pages
 ##  $PubDirUrl is the URL for the pub directory.
-$ScriptUrl = "$BaseUrl/index.php";
+$ScriptUrl = "$BaseUrl";
 $PubDirUrl = "$BaseUrl/pub";
 
 include_once('scripts/xlpage-utf-8.php');
