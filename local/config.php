@@ -16,6 +16,8 @@ $FmtPV['$BaseUrl'] = '$GLOBALS["BaseUrl"]';
 $ScriptUrl = "$BaseUrl/index.php";
 $PubDirUrl = "$BaseUrl/pub";
 
+include_once('scripts/xlpage-utf-8.php');
+
 ##  If you want to use URLs of the form .../pmwiki.php/Group/PageName
 ##  instead of .../pmwiki.php?p=Group.PageName, try setting
 ##  $EnablePathInfo below.  Note that this doesn't work in all environments,
