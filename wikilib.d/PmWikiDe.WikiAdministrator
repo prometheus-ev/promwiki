@@ -1,11 +1,12 @@
-version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
-agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
-author=Stephan Schwarzbold
-csum=Linkanpassung
-host=212.80.255.207
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.12) Gecko/20080201 Firefox/2.0.0.12
+author=st
+charset=ISO-8859-1
+csum=
+host=81.62.253.51
 name=PmWikiDe.WikiAdministrator
-rev=10
-targets=PmWiki.WikiAdministrator,PmWikiDe.InitialSetupTasks,PmWikiDe.Installation,PmWikiDe.DocumentationIndex,PmWikiDe.Audiences
-text=(:title Administrator des Wikis:)%0a[-%25green%25(deutsche Ãœbersetzung der Seite [[PmWiki.WikiAdministrator]], Stand 11.09.2005)-]%0a%0aEin WikiAdministrator ist eine Person (oder mehrere Personen) die ein PmWiki-System fÃ¼r Autoren und Besucher installiert, konfiguriert und administriert. PmWiki wurde so geschrieben, dass es die [[Installation]] und die [[PmWikiDe.Initial setup tasks|ersten Einstellungen]] so leicht wie mÃ¶glich macht (gerade auch fÃ¼r Anwender, die keine Experten fÃ¼r HTML, PHP oder Webserver-Software sind). Gleichzeitig ist PmWiki flexibel genug, dass jemand mit etwas Kenntnis Ã¼ber HTML und PHP seine PmWiki-Installation den eigenen BedÃ¼rfnissen entsprechend problemlos anpassen kann.%0a%0aSiehe [[PmWikiDe.DocumentationIndex|Dokumentationsindex]] fÃ¼r Seiten Ã¼ber die Administration von PmWiki und seinen [[PmWikiDe.Audiences|Zielgruppen]], fÃ¼r die PmWiki entwickelt wurde.%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|+]]|>>
-time=1173091844
+rev=14
+targets=PmWikiDe.InitialSetupTasks,PmWikiDe.Installation,PmWikiDe.DocumentationIndex,PmWikiDe.Audiences
+text=(:title Administrator des Wikis:)%0a(:Summary: Definition des Wiki-Administrators:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2005-09-11:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Grundlagen:)%0a%0aEin WikiAdministrator ist eine Person (oder mehrere Personen) die ein PmWiki-System für Autoren und Besucher installiert, konfiguriert und administriert. PmWiki wurde so geschrieben, dass es die [[Installation]] und die [[PmWikiDe.Initial setup tasks|ersten Einstellungen]] so leicht wie möglich macht (gerade auch für Anwender, die keine Experten für HTML, PHP oder Webserver-Software sind). Gleichzeitig ist PmWiki flexibel genug, dass jemand mit etwas Kenntnis über HTML und PHP seine PmWiki-Installation den eigenen Bedürfnissen entsprechend problemlos anpassen kann.%0a%0aSiehe [[PmWikiDe.DocumentationIndex|Dokumentationsindex]] für Seiten über die Administration von PmWiki und seinen [[PmWikiDe.Audiences|Zielgruppen]], für die PmWiki entwickelt wurde.%0a
+time=1205429252
 title=Administrator des Wikis

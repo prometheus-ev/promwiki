@@ -1,10 +1,12 @@
-version=pmwiki-2.1.1 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8.0.1) Gecko/20060111 Firefox/1.5.0.1
-author=Klonk
-csum=updated
-host=62.245.250.121
+version=pmwiki-2.2.0-beta68 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.5) Gecko/2008121622 Ubuntu/8.10 (intrepid) Firefox/3.0.5
+author=st
+charset=ISO-8859-1
+csum={$Name} in {*$Name} geändert
+host=62.203.50.220
 name=PmWikiDe.UploadQuickReference
-rev=9
+rev=19
 targets=PmWikiDe.Uploads,PmWikiDe.UploadQuickReference
-text=%25comment%25(deutsche Ãœbersetzung der Seite Site.EditQuickReference, Stand 16.03.2006)%0a>>class='quickref' color=#000000 bgcolor=#f9f9f9 font-family='Arial,sans-serif' font-size=12px padding=2px border='1px solid #cccccc'%3c%3c%0a'''%25newwin%25[[PmWikiDe/Uploads|Hochladen]]'''\\%0a1. Mit obigen "Durchsuchen" die "Hochzuladende Datei" auf lokalem Rechner auswÃ¤hlen.%0a%0a2. Im Feld "Anhang benennen zu" den Dateinamen an, den die Datei noch dem Hochladen erhalten soll eingeben. Dieser kann der gleiche sein, wie auf der Festplatte gespeichert, ''oder kann sich auch unterscheiden''. Lediglich die Erweiterung sollte stimmen.%0a%0a3. "$[Upload]" lÃ¤dt die Datei hoch.%0a%0a4. Um auf einen Anhang innerhalb einer Wikiseite in der Wikigruppe {$Group} zu verweisen, muss man nur @@[=Attach:=]''dateiname.erw''@@ im Seitentext eintragen.%0a%0a5. Nach dem hochladen kann man %0a**[[{$Name} | die Seite {$Name} ansehen]] oder%0a**[[{$Name}?action=edit | die Seite {$Name} bearbeiten]] oder%0a**die Dateiliste hinunterblÃ¤ttern um zu sehen was in die Wikigruppe {$Group} hochgeladen wurde%0a>>%3c%3c%0a%0a----%0a%0a!!Vorhandene Dateien%0a%0a(:attachlist:)
-time=1142504787
+text=(:title Upload Kurzhilfe:)%0a(:Summary: Upload Kurzhilfe:)%0a(:Original_Page: Site.EditQuickReference:)%0a(:Translation_Date: 2008-01-30:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Formular Element:)%0a>>class='quickref' color=#000000 bgcolor=#f9f9f9 font-family='Arial,sans-serif' font-size=12px padding=2px border='1px solid #cccccc'%3c%3c%0a'''%25newwin%25[[PmWikiDe/Uploads|Hochladen]]'''\\%0a1. Mit obigem "Durchsuchen" die hochzuladende Datei auf dem lokalen Rechner auswählen.%0a%0a2. Im Feld "Optional anderer Name" kann ein alternativer Name eingegeben werden, den die Datei noch dem Hochladen erhalten soll.  Die Erweiterung des Dateinamens muss aber gleich bleiben.%0a%0a3. "$[Upload]" lädt die Datei hoch.%0a%0a4. Um auf einen Anhang innerhalb einer Wikiseite in der Wikigruppe {*$Group} zu verweisen, muss man nur @@[=Attach:=]''dateiname.erw''@@ im Seitentext eintragen.%0a%0a5. Nach dem hochladen kann man %0a**[[{*$Name} | die Seite {$Name} ansehen]] oder%0a**[[{*$Name}?action=edit | die Seite {*$Name} bearbeiten]] oder%0a**die Dateiliste hinunterblättern, um zu sehen, was in die Wikigruppe {*$Group} hochgeladen wurde%0a>>%3c%3c%0a%0a----%0a%0a!!Vorhandene Dateien%0a%0a(:attachlist:)
+time=1231529489
+title=Upload Kurzhilfe

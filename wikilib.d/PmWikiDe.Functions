@@ -1,12 +1,13 @@
-version=pmwiki-2.2.0-beta34 ordered=1 urlencoded=1
-agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
-author=Stephan Schwarzbold
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.12) Gecko/20080201 Firefox/2.0.0.12
+author=st
+charset=ISO-8859-1
 csum=
 ctime=1162888231
-host=212.80.246.17
+host=81.62.212.18
 name=PmWikiDe.Functions
-rev=14
-targets=PmWiki.Functions
-text=(:title Funktionen - bisher ohne Inhalt:)%0a%0a[--%25note%25Die Seite [[PmWiki.Functions]] ist hier hinein zu Ã¼bersetzen, Stand 2007-03-04.--]
-time=1173036528
-title=Funktionen - bisher ohne Inhalt
+rev=19
+targets=PmWiki.Functions,PmWikiDe.DocumentationIndex
+text=(:title Funktionen:)%0a(:Summary: Beschreibung verschiedener Funktionen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2007-04-03:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Autoren (Fortgeschrittene):)%0a%0a%25red%25'''''Die Seite [[PmWiki.Functions]] wurde noch nicht übersetzt. Hilf mit und übersetze die englische Seite hier.'''''%25%25%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
+time=1205251069
+title=Funktionen

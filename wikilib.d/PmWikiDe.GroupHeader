@@ -1,10 +1,11 @@
-version=pmwiki-2.1.6 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3
-author=
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)
+author=st
+charset=ISO-8859-1
 csum=
-host=213.138.52.119
+host=62.2.127.180
 name=PmWikiDe.GroupHeader
-rev=5
+rev=16
 targets=
-text=%25define=trail bgcolor=#eee block%25%0a%25define=note font-style=italic color=green%25%0a%25define=important block bgcolor=#fcc border='1px solid black' padding=5px%25%0a%25define=audience class='frame rfloat' font-size:smaller bgcolor=#ffc%25%0a%25define=editingnote rframe width=200px font-size=smaller bgcolor=#ffcccc%25
-time=1149079914
+text=%25define=trail bgcolor=#eee block%25%0a%25define=note font-style=italic color=green%25%0a%25define=important block bgcolor=#fcc border='1px solid black' padding=5px%25%0a%25define=audience class='frame rfloat' font-size:smaller bgcolor=#ffc%25%0a%25define=editingnote rframe width=200px font-size=smaller bgcolor=#ffcccc%25%0a%25define=orange color=#ff9900%25%0a%25audience%25{{$FullName}$:Audience}%25%25%0a[-%25green%25(deutsche Übersetzung der Seite [[{$:Original_Page}]], Stand {$:Translation_Date})-] [[%3c%3c]]%0a
+time=1205332399

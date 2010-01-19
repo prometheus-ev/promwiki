@@ -1,11 +1,12 @@
-version=pmwiki-2.2.0-beta21 ordered=1 urlencoded=1
-agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Avant Browser; .NET CLR 2.0.50727)
-author=Stephan Schwarzbold
-csum=Antwort auf Commentar
-host=141.54.174.149
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14
+author=st
+charset=ISO-8859-1
+csum=
+host=62.203.249.25
 name=PmWikiDe.ListeAllerSeiten
-rev=13
-targets=
-text=(:title Liste aller deutschen Seiten:)%0aÃœbersicht der Seiten der deutschen Ãœbersetzung. Zuletzt bearbeitete Seiten befinden sich unten, potentiell Ã¼berarbeitungswÃ¼rdige Seiten am Anfang der Liste.%0a%0a(:pagelist group=PmWikiDe fmt=#title order=time list=normal:)%0a%0a%25comment%25Warum ist die Seite eigentlich nicht in alphabetischer Reihenfolge und sondern in last Change? und Warum wenn schon so, die neuesten am Schluss ??%0a%0a%25comment%25?? %0a%0a%25comment%25Meine Frage zielte darauf ab, ob es mÃ¶glich solche von pmwiki erzeugten Indexe auch anders auszugeben und wenn es mÃ¶glich ist, warum dann Dieser in einer eigentlich so dÃ¤mlichen Sortierung vorliegt.
-time=1168660236
+rev=38
+targets=PmWikiDe.PmWikiDe,PmWikiDe.FullName
+text=(:nogroupheader:)%0a(:title Liste aller deutschen Seiten:)%0aÜbersicht der Seiten in der Gruppe '[[{$Group}]]' in alphabetischer Reihenfolge. Hilf mit die Dokumentation in Deutsch zu vervollständigen: [[http://pmwiki.org/wiki/PmWikiDe/StandDerUebersetzung|PmWiki.org - Stand der Übersetzung]]%0a%0a(:pagelist group=PmWikiDe order=name fmt=#vorlage_liste:)%0a%0a>>comment%3c%3c%0a[[#vorlage_liste]]%0a(:template first:)%0a(:table width="100%25" border="0" cellpadding="3":)%0a(:cellnr:)'''Seitenname'''%0a(:cell:)'''Stand der Übersetzung'''%0a(:cell:)'''Titel'''%0a(:cell:)'''Status der Übersetzung'''%0a(:template each:)%0a(:cellnr:)[[{=$FullName}]]%0a(:cell:){{=$FullName}$:Translation_Date}%0a(:cell:)[[{=$FullName}|+]]%0a(:cell:){{=$FullName}$:Translation_Status}%0a(:template last:)%0a(:tableend:)%0a[[#vorlage_listeend]]%0a>>%3c%3c
+time=1210620586
 title=Liste aller deutschen Seiten

@@ -1,10 +1,11 @@
-version=pmwiki-2.2.0-beta20 ordered=1 urlencoded=1
-agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)
-author=
-csum=
-host=62.128.20.13
+version=pmwiki-2.2.0 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.2; de; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7
+author=Michael Engelke
+charset=ISO-8859-1
+csum=Restore
+host=89.198.139.71
 name=PmWikiDe.SideBar
-rev=10
-targets=PmWikiDe.PmWikiDe,PmWikiDe.WikiWikiWeb,PmWikiDe.Installation,PmWikiDe.DocumentationIndex,PmWikiDe.ListeAllerSeiten,PmWikiDe.WikiSandbox,PmWikiDe.RecentChanges
-text=%25sidehead%25[[PmWikiDe|Deutsches Wiki]]%0a* [[WikiWikiWeb | Was ist ein Wiki?]]%0a* [[Installation | Installation]]%0a* [[DocumentationIndex|Dokumentationsindex]]%0a* [[ListeAllerSeiten | Liste aller deutschen Seiten]]%0a* [[WikiSandbox|Sandkasten]]%0a* [[RecentChanges | Aktuelle Änderungen]]%0a %0a----%0a%0a(:include Main/SideBar:)
-time=1168612944
+rev=53
+targets=PmWikiDe.PmWikiDe,PmWikiDe.WikiWikiWeb,PmWikiDe.WikiElements,PmWikiDe.Installation,PmWikiDe.DocumentationIndex,PmWikiDe.WikiSandbox,PmWikiDe.SideBar
+text=%25sidehead%25[[PmWikiDe|PmWiki (''deutsch'')]]%0a* [[WikiWikiWeb | Was ist ein Wiki?]]%0a* [[WikiElements | + ]]%0a* [[Installation | + ]]%0a* [[DocumentationIndex | + ]]%0a* [[WikiSandbox | + ]]%0a(:if false:)%25right%25[--[[PmWikiDe/SideBar?action=edit|$[Edit]]]--](:if:)%0a----%0a'''Englisch:'''%0a(:include Site/SideBar:)%0a
+time=1238090573

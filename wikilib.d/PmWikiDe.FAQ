@@ -1,0 +1,13 @@
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.12) Gecko/20080207 Ubuntu/7.10 (gutsy) Firefox/2.0.0.12
+author=st
+charset=ISO-8859-1
+csum=
+ctime=1206102986
+host=62.203.205.211
+name=PmWikiDe.FAQ
+rev=4
+targets=PmWikiDe.DocumentationIndex
+text=(:title FAQ:)%0a(:Summary: frequently ansered/ask Questions - häufig beantwortete/gestellte Fragen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Administratoren:)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
+time=1206103837
+title=FAQ

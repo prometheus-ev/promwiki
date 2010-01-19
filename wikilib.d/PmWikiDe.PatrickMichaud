@@ -1,10 +1,12 @@
-version=pmwiki-2.1.beta12 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8) Gecko/20051111 Firefox/1.5
-author=Klonk
-host=62.245.250.121
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.12) Gecko/20080201 Firefox/2.0.0.12
+author=st
+charset=ISO-8859-1
+csum=
+host=81.62.253.51
 name=PmWikiDe.PatrickMichaud
-rev=8
-targets=PmWiki.PatrickMichaud,PmWikiDe.PatrickMichaud
-text=(:title Patrick Michaud:)%0a[-%25green%25(deutsche Übersetzung der Seite [[PmWiki.{$Name}]], Stand 14.09.2005)-]%0a%0aPatrick Michaud ([[PatrickMichaud |Pm]]) ist der Autor von PmWiki. Man kann mehr über ihn unter http://www.pmichaud.com erfahren.
-time=1134137253
+rev=14
+targets=
+text=(:title Patrick Michaud:)%0a(:Summary: Pm -- der Entwickler von PmWiki:)%0a(:Original_Page: PmWiki.PatrickMichaud:)%0a(:Translation_Date: 2008-03-11:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Grundlagen:)%0a%0aPatrick Michaud (Pm) ist der Autor von PmWiki. Mehr �ber ihn kann man unter [[http://www.pmichaud.com]] erfahren.
+time=1205429375
 title=Patrick Michaud

@@ -1,13 +1,15 @@
-version=pmwiki-2.2.0-beta27 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1
-author=
-csum=
-host=81.14.164.47
+version=pmwiki-2.2.0 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.30 Safari/525.13
+author=Petko
+charset=ISO-8859-1
+csum=Language:Deutsch
+ctime=1203276206
+host=81.255.139.61
 name=PmWikiDe.PmWikiDe
-passwdattr=$1$HQRQZ/UB$YxYUfDCGOTMrBUAU/nZQz/
-passwdedit=$1$rcD4NVIr$sCNPMGsc2Oh.te9f7ZANd0
-rev=146
-targets=PmWiki.PmWiki,PmWikiDe.WikiWikiWeb,PmWikiDe.BasicEditing,PmWikiDe.Passwords,PmWikiDe.PmWikiPhilosophy,PmWikiDe.DocumentationIndex,PmWikiDe.DiskussionÜbersetzungen,PmWikiDe.SpezielleInstallationen,PmWikiDe.ConfigFileLocalization,PmWikiDe.WikiNode
-text=(:title Übersicht:)%0a[-%25green%25(deutsche Übersetzung der Seite [[PmWiki.PmWiki]], Stand 03.01.2006)-]%0a%0aPMWiki/PmWiki ist ein [[PmWikiDe/WikiWikiWeb|wiki-basiertes]] System für die gemeinsame Erstellung und Wartung von Webseiten.%0a%0a'''PmWiki''' Seiten ''sehen'' genauso '+aus wie normale+' Webseiten, bis auf den kleinen Unterschied, dass sie einen "Bearbeiten" Link aufweisen. Damit ist es einfach, bestehende Seiten zu verändern bzw. neue Seiten zu erstellen. Hierzu gibt es einige [[PmWikiDe/BasicEditing|Grundlagen]]. Man muss nichts über '''HTML''' oder '''CSS''' wissen bzw. es benutzen. Das Bearbeiten von Seiten kann allgemein möglich sein, es kann aber auch auf nur eine kleine Gruppe von Autoren beschränkt werden.%0a%0a!![-Entwicklungsziel-]%0a%0aPmWiki ist in PHP geschrieben. Es wurde speziell hinsichtlich einer einfachen Installation und Konfigurierbarkeit entwickelt. Der Fokus liegt in der leichten Bedienbarkeit, um die Grenzen zu reduzieren, die Menschen mit geringen IT-Kenntnissen davon abhalten könnten, ein Wiki zu verwenden.%0a%0a%0a!![-Eigenschaften-]%0a%0a:Layout Vorlagen ([[Cookbook:Skins |Skins]]):PmWiki bietet ein Vorlagensystem an, mit dem es einfach möglich ist, das Aussehen der Webseite zu verändern. Damit ergibt sich ein hoher Grad an Flexibilität hinsichtlich Funktionalität und Aussehen.%0a%0a:Zugriffskontrolle:PmWiki erlaubt es den Benutzern [[passwords|+]] für den Schutz einzelner Seiten oder Gruppen einzurichten. Damit können zum Beispiel bestimmte Bereiche für die gemeinsame Bearbeitung durch bestimmte Gruppen freigegeben werden, wie es häufig im Intranet einer Firma der Fall ist.\\\%0aPasswortschutz kann beim Lesen, Bearbeiten, Hochladen und beim Ändern der Passwörter für eingeschränkte Bereiche angewendet werden. PmWiki kann auch externe Passwortdatenbanken verwenden, z.B. ''.htpasswd'', MySQL, und LDAP.%0a%0a:Anpassung:PmWiki folgt einer Design-[[PmWiki philosophy|Philosophie]]. Die wesentlichen Punkte sind die Einfachheit der Installation, der Wartung und das Heraushalten von nicht zwingend benötigten Funktionen aus dem Kern. PmWiki ist so ausgelegt, dass eine Anpassung mit eigenen Erweiterungen unterstützt wird. Diese sind im "[[(Cookbook:)Cookbook]]" zu finden (englisch).%0a%0aPmWiki wird unter den Bedingungen der "General Public License" vertrieben. Diese Webseite arbeitet mit der Version {$Version}.%0a%0aPmWiki ist ein eingetragenes Markenzeichen von [[http://www.pmichaud.com/|Patrick R. Michaud]].%0a%0aDie '''PmWiki''' Homepage findet sich im Internet unter [[(http://)pmwiki.org(/)]].%0a%0a%0a----%0a%0a* '''[[DocumentationIndex | Deutschsprachige Dokumentation]]'''%0a* [[DiskussionÜbersetzungen | Diskussion und Informationen zur Übersetzung ins Deutsche]] %0a* [[SpezielleInstallationen| Spezielle Installationen Anleitung zur Installation von PmWiki bei verschiedenen Providern]]%0a* [[PmWikiDe.ConfigFileLocalization|Lokale Einstellungen]] in der config.php (für ein deutsches PmWiki)%0a%0a* %25newwin%25[[http://www.wikidorf.de/reintechnisch/Inhalt/PmWiki2Konfiguration |PmWiki2 Konfigurationshinweise (Winfried Mueller)]]%0a* %25newwin%25[[http://www.wikidorf.de/reintechnisch/Inhalt/PmWikiEinfuehrung |Einführung in die Benutzung der Wikisoftware PmWiki2 (Winfried Mueller)]]%0a*[[Wiki Node]]%0a
-time=1169898309
-title=Übersicht
+passwdattr=$1$AHmTr5p/$7TR2LlJOcW1DHFz.bRMP..
+passwdedit=$1$SPBrJkkt$fzO6ZfQVf19HFo.hRAIjV0
+rev=17
+targets=
+text=(:redirect PmWiki:)%0a(:title Automatische Startseite der Gruppe:)%0a(:Summary: Wird umgeleitet:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-10:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: admin:)%0a(:Language:Deutsch:)%0a%0a
+time=1233607967
+title=Automatische Startseite der Gruppe

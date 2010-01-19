@@ -1,10 +1,12 @@
-version=pmwiki-2.1.3 ordered=1 urlencoded=1
-agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; 1&1 Internet AG by USt)
-author=
+version=pmwiki-2.2.7 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.15) Gecko/2009101601 Firefox/3.0.15
+author=JC
+charset=ISO-8859-1
 csum=
-host=84.159.9.164
+host=92.72.143.65
 name=PmWikiDe.PmWiki
-rev=2
-targets=
-text=(:redirect PmWikiDe:)
-time=1142779590
+rev=41
+targets=PmWikiDe.WikiWikiWeb,PmWikiDe.BasicEditing,PmWikiDe.Skins,PmWikiDe.PmWikiPhilosophy,PmWikiDe.Installation
+text=(:title PmWiki Übersicht:)%0a(:Summary: Allgemeines zur Software PmWiki:)%0a(:Original_Page: PmWiki.PmWiki:)%0a(:Translation_Date: 2008-03-27:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Grundlagen:)%0a%0a'''PmWiki''' ist ein [[WikiWikiWeb|wiki-basiertes]] System für die gemeinsame Erstellung und Wartung von Webseiten.%0a%0aPmWiki Seiten sehen genauso aus wie normale Webseiten, bis auf den kleinen Unterschied, dass sie einen "Bearbeiten" Link aufweisen. Das macht es einfach, bestehende Seiten zu verändern bzw. neue Seiten zu erstellen. Hierzu gibt es einige [[PmWikiDe/BasicEditing|Grundlagen der Bearbeitung]]. Man muss nichts über HTML oder CSS wissen bzw. es benutzen. Das Bearbeiten von Seiten kann allgemein möglich sein, es kann aber auch auf nur eine kleine Gruppe von Autoren beschränkt werden.%0a%0a-%3c'''Frei gestaltbares Layout''': Ein Administrator einer Netzseite kann das Aussehen und die Funktion einer PmWiki-Installation schnell ändern, indem er verschiedene [[Skins | Layout-Vorlagen]] und HTML-Vorlagen nutzt. Wenn sich unter den [[Cookbook:Skins | bereits vorhandenen Layout-Vorlagen]] keine Geeignete findet, lässt sich auf einfache Art und Weise eine Neue erstellen oder Vorhandene modifizieren.%0a%0a-%3c'''Zugriffskontrolle''': PmWiki ermöglicht einen Passwortschutz für die gesamte Netzseite, für Gruppen von Seiten und für einzelne Seiten. Durch die Vergabe von Passwörtern kann festgelegt werden, wer Seiten lesen darf, wer Seiten bearbeiten darf und wer Dateien hochladen darf. Das Zugriffskontroll-System von PmWiki ist für sich eigenständig, es kann aber auch gemeinsam mit existierenden Passwort-Datenbanken, wie ''.htpasswd'', LDAP-Servern oder MySQL-Datenbanken, verwendet werden.%0a%0a-%3c'''Anpassung und Erweiterbarkeit''': Ein Prinzip der Design-[[PmWiki philosophy|Philosophie]] von PmWiki ist es, nur essenzielle Funktionen in die Software zu integrieren, dafür aber Administratoren die Möglichkeit zu bieten, Anpassungen sehr einfach vornehmen und schnell neue Formatierungsanweisungen zur Software hinzufügen zu können. Hunderte von Features sind bereits als Erweiterungen (so genannte "Rezepte") verfügbar; sie werden über das PmWiki-[[(Cookbook:)Cookbook | Kochbuch]] (auf Englisch) zur Verfügung gestellt.%0a%0aPmWiki ist in [[http://php.net/|PHP]] geschrieben und wird unter den Bedingungen der [[http://www.gnu.org/copyleft/gpl.html | General Public License]] veröffentlicht. Es wurde speziell mit dem Ziel entwickelt, eine einfache [[Installation]] und Konfiguration zu bieten sowie für vielfältige Anwendungen nutzbar zu sein. Diese Webseite arbeitet mit der Version {$Version}.%0a%0aPmWiki ist ein eingetragenes Markenzeichen von [[http://pmichaud.com/|Patrick R. Michaud]].%0a%0aDie PmWiki-Homepage findet sich im Internet unter [[(http://)pmwiki.org(/)]].
+time=1258244065
+title=PmWiki Übersicht

@@ -1,11 +1,13 @@
-version=pmwiki-2.1.6 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3
-author=
-csum=dg
-ctime=1148844446
-host=88.64.35.0
+version=pmwiki-2.2.0-beta68 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.0.1) Gecko/2008070400 SUSE/3.0.1-7.2 Firefox/3.0.1
+author=dst
+charset=ISO-8859-1
+csum=
+ctime=1205340064
+host=139.11.181.103
 name=PmWikiDe.SimultaneousEdits
-rev=1
-targets=
-text=
-time=1148844446
+rev=14
+targets=Profiles.St,PmWikiDe.WikiSandbox,PmWikiDe.DocumentationIndex
+text=(:title Gleichzeitig bearbeitete Seiten:)%0a(:Summary: Seiten die gleichzeitig von mehreren Benutzern geändert werden:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-12:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Autoren (Grundlagen):)%0a%25rframe red%25Seite wird gerade bearbeitet -- welch Hinweis auf dieser Seite ;-) - [[~st]] 12.03.2008 11:41 Uhr%25%25 [[%3c%3c]]%0a%0aPmWiki unterstützt, dass mehrere Benutzer gleichzeitig die gleiche Seite bearbeiten können. Nachfolgend wird beschrieben wie sich PmWiki in diesem Fall verhält.%0a%0a# Der bestehende Text. Dieser Text wird nun ergänzt und/oder verändert.%0a# Peter bearbeitet nun die Seite und macht Änderungen.%0a# Sabrina beginnt ebenfalls mit der Bearbeitung und sieht Peter's Änderungen natürlich noch nicht.%0a# Peter speichert die Seite%0a# Sabrina speichert die Seite ebenfalls.%0a%0aSabrina wird nun im Titel der Seite darauf hingewiesen, dass ihre Änderungen nicht einfach gespeichert werden konnten.%0a%0a%25green%25''Seit Beginn der Bearbeitung wurde diese Seite verändert. Die Unterschiede wurden nachfolgend in den Text integriert, damit Sie das Ergebnis vor dem Speichern überprüfen können. Konflikte, die nicht aufgelöst werden konnten sind von %3c%3c%3c%3c%3c%3c%3c und >>>>>>> eingeschlossen.''%25%25%0a%0aDie Seite wird noch nicht gespeichert. Im Eingabefeld wird der Text markiert:%0a%0a [=%0a%3c%3c%3c%3c%3c%3c%3c %0aDer bestehende Text. Dieser Text wird nun ergänzt und/oder verändert. Sabrina ändert gleichzeitig.%0a=======%0aDer bestehende Text. Dieser Text wird nun ergänzt und/oder verändert. Peter verändert den Text.%0a>>>>>>> %0a=]%0a%0aAm besten testet man das gleich selber in dem man mehrere Webbrowser-Fenster oder Tabs im gleichen Fenster öffnet und (wie oben beschrieben) diese Situation simuliert. Der richtige Platz dafür ist die [[WikiSandbox]].%0a%0a!! Bemerkung%0aManche Server-Umgebungen wie Windows oder wenn PHP im 'safe_mode' läuft sind nicht in der Lage die gleichzeitige Bearbeitung wie oben beschrieben richtig auszugeben. Lösungen für dieses Problem findet man im Kochbuch auf pmwiki.org: [[http://pmwiki.org/wiki/cookbook/SimultaneousEdits|Cookbook:SimultaneousEdits]]%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
+time=1222344360
+title=Gleichzeitig bearbeitete Seiten

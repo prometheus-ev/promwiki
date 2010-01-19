@@ -1,10 +1,12 @@
-version=pmwiki-2.1.beta12 ordered=1 urlencoded=1
-agent=Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8) Gecko/20051111 Firefox/1.5
-author=Klonk
-host=62.245.250.121
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.12) Gecko/20080129 Iceweasel/2.0.0.12 (Debian-2.0.0.12-0etch1)
+author=Bartolin
+charset=ISO-8859-1
+csum=updated translation
+host=77.185.143.159
 name=PmWikiDe.DeletingPages
-rev=4
-targets=PmWiki.DeletingPages,PmWikiDe.EditVariables
-text=(:title LÃ¶schen von Seiten :)%0a[-%25green%25(deutsche Ãœbersetzung der Seite [[PmWiki.DeletingPages]], Stand 20.10.2005)-]%0a%0aUm eine Seite zu lÃ¶schen, klicken Sie auf Bearbeiten und ersetzen Sie den gesamten Text der Seite durch das folgende Wort:%0a%0a    delete%0a%0aNach Speichern der Ã„nderung ist die Seite gelÃ¶scht. Als SicherheitsmaÃŸnahme bleibt die Seite auf dem Server bestehen (mit einem Zeitstempel) und kann somit vom Wiki-Administrator wiederhergestellt werden.%0a%0aDas Standardwort, welches zum LÃ¶schen von Seiten verwendet wird ("delete"), kann durch Setzen der Variable $DeleteKeyPattern (s. [[EditVariables|Variablen fÃ¼r die Bearbeitung]]) geÃ¤ndert werden. Falls die Gefahr bÃ¶swilliger LÃ¶schungen besteht, kann es hilfreich sein, das LÃ¶schwort durch ein ungewÃ¶hnlicheres Wort zu ersetzen. Ausserdem gibt es ein "Rezept", welches die Verwendung eines separaten LÃ¶schbefehls vorsieht (Cookbook:DeleteAction).
-time=1134136969
-title=LÃ¶schen von Seiten 
+rev=7
+targets=PmWikiDe.WikiAdministrator,PmWikiDe.EditVariables,PmWikiDe.DocumentationIndex
+text=(:title Löschen von Seiten:)%0a(:Summary: Löschen von Seiten:)%0a(:Original_Page: PmWiki.DeletingPages:)%0a(:Translation_Date: 2008-03-19:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Autoren und Administratoren:)%0a%0aUm eine Seite zu löschen, klicken Sie auf Bearbeiten und ersetzen Sie den gesamten Text der Seite ([=STRG=] + a) durch das einzelne Wort:%0a%0a->@@delete@@%0a%0aBeachten Sie, dass es hilfreich ist, mit einem kurzen Kommentar im Feld @@Zusammenfassung@@ zu erklären, warum Sie die Seite gelöscht haben. (Das Feld @@Zusammenfassung@@ ist in der Regel direkt unter dem Bearbeiten-Fenster zu finden.)%0a%0aNach Speichern der Änderung ist die Seite gelöscht. Als Sicherheitsmaßnahme bleibt die Seite auf dem Server bestehen (mit einem Zeitstempel) und kann somit vom [[WikiAdministrator | Wiki-Administrator]] wiederhergestellt werden.%0a%0aWenn Sie vermuten, dass eine Seite gelöscht wurde, sich dessen aber nicht sicher sind, schauen Sie auf der Seite [=RecentChanges=] der jeweiligen Wikigruppe nach. Das Löschen einer Seite zählt als Bearbeiten und wird insofern auf den Seiten mit aktuellen Änderungen ([=RecentChanges=] und [={$SiteGroup}.AllRecentChanges}=] festgehalten.%0a%0aDas Standardwort, welches zum Löschen von Seiten verwendet wird ("delete"), kann durch Setzen der Variable $DeleteKeyPattern (s. [[EditVariables|Variablen für die Bearbeitung]]) geändert werden. Falls die Gefahr böswilliger Löschungen besteht, kann es hilfreich sein, das Löschwort durch ein ungewöhnlicheres Wort zu ersetzen. Ausserdem gibt es ein Kochbuch-Rezept, welches die Verwendung eines separaten Löschbefehls vorsieht (Cookbook:DeleteAction) (nur auf Englisch verfügbar).%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>>%0a%0a>>faq%3c%3c [[#faq]]%0a%0aQ: Löschen von Gruppen und Kategorien: Wie werde ich Gruppen oder Kategorien wieder los, nachdem ich sie einmal angelegt habe?%0aA: Ein Administrator kann die unerwünschten Seiten einfach aus dem Verzeichnis @@wiki.d/@@ löschen. Im Normalfall reicht es nicht, alle Seiten einer Gruppe über das Wiki (mittels @@delete@@) zu löschen, weil das Löschen der Seiten als Änderung interpretiert wird und die Seite @@RecentChanges@@ neu erzeugt wird. Es ist aber möglich, die Konfiguration zu zu ändern, dass die [=RecentChanges=]-Seiten für Wikigruppen über das Wiki gelöscht werden können -- siehe das Kochbuch-Rezept [[Cookbook:RecentChangesDeletion]] (nur auf Englisch verfügbar).
+time=1205834210
+title=Löschen von Seiten

@@ -1,0 +1,13 @@
+version=pmwiki-2.2.0-beta65 ordered=1 urlencoded=1
+agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)
+author=st
+charset=ISO-8859-1
+csum=
+ctime=1206017375
+host=62.2.127.180
+name=PmWikiDe.PerGroupCustomizations
+rev=2
+targets=PmWikiDe.DocumentationIndex
+text=(:title Individuelle Einstellungen pro Gruppe:)%0a(:Summary: Pro Gruppe können individuelle Einstellungen vorgenommen werden.:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25green%25englisch%25%25:)%0a(:Audience: Administratoren (FTP):)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
+time=1206017576
+title=Individuelle Einstellungen pro Gruppe
