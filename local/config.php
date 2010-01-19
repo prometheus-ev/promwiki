@@ -69,6 +69,9 @@ $SearchPatterns['default'][] = '!\.Group(?:Print)?(?:Header|Footer|Attributes)$!
 $SearchPatterns['normal'][] = '!-(?:Preferences|EditForm|EditQuickReference)$!';
 $SearchPatterns['normal'][] = '!(?:Scratchpad)$!';
 
+## Check for new versions of recipes on pmwiki.org
+include_once('cookbook/recipecheck.php');
+
 ## Provide a form to allow users to create new pages
 include_once("cookbook/newpagebox3.php");
 
