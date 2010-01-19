@@ -95,6 +95,8 @@ $EnablePostAuthorRequired = 1;
 ## http://www.pmwiki.org/wiki/PmWiki/Drafts
 $EnableDrafts = 1;
 
+$EnableRelativePageLinks = 0;
+
 ##  Setting $EnableDiag turns on the ?action=diag and ?action=phpinfo
 ##  actions, which often helps the PmWiki authors to troubleshoot 
 ##  various configuration and execution problems.
