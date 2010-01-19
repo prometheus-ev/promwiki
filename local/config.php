@@ -69,6 +69,9 @@ $SearchPatterns['default'][] = '!\.Group(?:Print)?(?:Header|Footer|Attributes)$!
 $SearchPatterns['normal'][] = '!-(?:Preferences|EditForm|EditQuickReference)$!';
 $SearchPatterns['normal'][] = '!(?:Scratchpad)$!';
 
+## http://www.pmwiki.org/wiki/PmWiki/SiteAnalyzer
+include_once("$FarmD/cookbook/analyze.php");
+
 ## Check for new versions of recipes on pmwiki.org
 include_once('cookbook/recipecheck.php');
 
