@@ -8,6 +8,6 @@ host=62.2.127.180
 name=PmWikiDe.PerGroupCustomizations
 rev=2
 targets=PmWikiDe.DocumentationIndex
-text=(:title Individuelle Einstellungen pro Gruppe:)%0a(:Summary: Pro Gruppe können individuelle Einstellungen vorgenommen werden.:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25green%25englisch%25%25:)%0a(:Audience: Administratoren (FTP):)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
+text=(:title Individuelle Einstellungen pro Gruppe:)%0a(:Summary: Pro Gruppe kÃ¶nnen individuelle Einstellungen vorgenommen werden.:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25green%25englisch%25%25:)%0a(:Audience: Administratoren (FTP):)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
 time=1206017576
 title=Individuelle Einstellungen pro Gruppe

@@ -1,10 +1,10 @@
 version=pmwiki-2.2.0-beta25 ordered=1 urlencoded=1
 agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Avant Browser; .NET CLR 2.0.50727)
 author=Stephan Schwarzbold
-csum=Übersetzung des sinnfreien englishen Satzes
+csum=Ãœbersetzung des sinnfreien englishen Satzes
 host=141.54.174.149
 name=PmWikiDe.I18nVariablen
 rev=5
 targets=PmWikiDe.Variablen,PmWikiDe.PmWiki,PmWikiDe.Internationalisierungen
-text=%25trail%25%3c%3c|[[Variablen]]|>>%0a%0aDiese Seite soll (später) die von [[PmWiki]] genutzten Variablen zur [[Internationalisierungen]] (i18n) beschreiben.
+text=%25trail%25%3c%3c|[[Variablen]]|>>%0a%0aDiese Seite soll (spÃ¤ter) die von [[PmWiki]] genutzten Variablen zur [[Internationalisierungen]] (i18n) beschreiben.
 time=1169524919

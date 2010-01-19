@@ -8,6 +8,6 @@ host=62.203.205.211
 name=PmWikiDe.FAQ
 rev=4
 targets=PmWikiDe.DocumentationIndex
-text=(:title FAQ:)%0a(:Summary: frequently ansered/ask Questions - häufig beantwortete/gestellte Fragen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Administratoren:)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
+text=(:title FAQ:)%0a(:Summary: frequently ansered/ask Questions - hÃ¤ufig beantwortete/gestellte Fragen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: %25red%25englisch%25%25:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Administratoren:)%0a%0a(:include PmWiki/{$Name}:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex | +]]|>> %0a
 time=1206103837
 title=FAQ

@@ -8,6 +8,6 @@ host=81.62.212.18
 name=PmWikiDe.Functions
 rev=19
 targets=PmWiki.Functions,PmWikiDe.DocumentationIndex
-text=(:title Funktionen:)%0a(:Summary: Beschreibung verschiedener Funktionen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2007-04-03:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Autoren (Fortgeschrittene):)%0a%0a%25red%25'''''Die Seite [[PmWiki.Functions]] wurde noch nicht übersetzt. Hilf mit und übersetze die englische Seite hier.'''''%25%25%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
+text=(:title Funktionen:)%0a(:Summary: Beschreibung verschiedener Funktionen:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2007-04-03:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Autoren (Fortgeschrittene):)%0a%0a%25red%25'''''Die Seite [[PmWiki.Functions]] wurde noch nicht Ã¼bersetzt. Hilf mit und Ã¼bersetze die englische Seite hier.'''''%25%25%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
 time=1205251069
 title=Funktionen

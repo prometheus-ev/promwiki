@@ -7,5 +7,5 @@ host=62.2.127.180
 name=PmWikiDe.GroupHeader
 rev=16
 targets=
-text=%25define=trail bgcolor=#eee block%25%0a%25define=note font-style=italic color=green%25%0a%25define=important block bgcolor=#fcc border='1px solid black' padding=5px%25%0a%25define=audience class='frame rfloat' font-size:smaller bgcolor=#ffc%25%0a%25define=editingnote rframe width=200px font-size=smaller bgcolor=#ffcccc%25%0a%25define=orange color=#ff9900%25%0a%25audience%25{{$FullName}$:Audience}%25%25%0a[-%25green%25(deutsche Übersetzung der Seite [[{$:Original_Page}]], Stand {$:Translation_Date})-] [[%3c%3c]]%0a
+text=%25define=trail bgcolor=#eee block%25%0a%25define=note font-style=italic color=green%25%0a%25define=important block bgcolor=#fcc border='1px solid black' padding=5px%25%0a%25define=audience class='frame rfloat' font-size:smaller bgcolor=#ffc%25%0a%25define=editingnote rframe width=200px font-size=smaller bgcolor=#ffcccc%25%0a%25define=orange color=#ff9900%25%0a%25audience%25{{$FullName}$:Audience}%25%25%0a[-%25green%25(deutsche Ãœbersetzung der Seite [[{$:Original_Page}]], Stand {$:Translation_Date})-] [[%3c%3c]]%0a
 time=1205332399

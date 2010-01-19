@@ -8,6 +8,6 @@ host=81.62.253.51
 name=PmWikiDe.WikiPage
 rev=10
 targets=PmWikiDe.WikiWikiWeb,PmWikiDe.WikiStructure,PmWikiDe.WikiGroup
-text=(:title Wiki-Seite:)%0a(:Summary: Erkl‰rung Wiki-Seite:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-10:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Grundlagen:)%0a%0aEine WikiSeite ist der Grundbaustein eines [[WikiWikiWeb|+]] und enth‰lt Text und Bilder.%0a%0aMehr Information dar¸ber bei [[WikiStructure|+]], [[WikiGroup|+]] und [[WikiWikiWeb|+]]. %0a%0a
+text=(:title Wiki-Seite:)%0a(:Summary: Erkl√§rung Wiki-Seite:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-10:)%0a(:Translation_Status: %25green%25fertig%25%25:)%0a(:Audience: Grundlagen:)%0a%0aEine WikiSeite ist der Grundbaustein eines [[WikiWikiWeb|+]] und enth√§lt Text und Bilder.%0a%0aMehr Information dar√ºber bei [[WikiStructure|+]], [[WikiGroup|+]] und [[WikiWikiWeb|+]]. %0a%0a
 time=1205429170
 title=Wiki-Seite

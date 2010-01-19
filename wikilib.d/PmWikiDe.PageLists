@@ -8,6 +8,6 @@ host=81.62.212.18
 name=PmWikiDe.PageLists
 rev=9
 targets=PmWikiDe.DocumentationIndex
-text=(:title Seitenlisten:)%0a(:Summary: Erstellung von Seitenlisten:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-10:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Autoren (Fortgeschrittene):)%0a%0a[-%25green%25'''Hinweis: Die deutsche Übersetzung der Seite fehlt noch'''%25%25-]%0a%0a(:include PmWiki/PageLists:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
+text=(:title Seitenlisten:)%0a(:Summary: Erstellung von Seitenlisten:)%0a(:Original_Page: PmWiki.{$Name}:)%0a(:Translation_Date: 2008-03-10:)%0a(:Translation_Status: %25red%25ToDo%25%25:)%0a(:Audience: Autoren (Fortgeschrittene):)%0a%0a[-%25green%25'''Hinweis: Die deutsche Ãœbersetzung der Seite fehlt noch'''%25%25-]%0a%0a(:include PmWiki/PageLists:)%0a%0a%25trail%25 %3c%3c|[[DocumentationIndex|Dokumentationsindex]]|>>
 time=1205254009
 title=Seitenlisten
