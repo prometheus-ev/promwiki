@@ -1200,7 +1200,7 @@ function TextSection($text, $sections, $args = NULL) {
     $text = substr($text, $pos);
   }
   if ($bb)
-    $text = preg_replace("/(\n)[^\n]*\\[\\[#$bb\\]\\].*$/s", '$1', $text, 1);
+    $text = preg_replace("/\\[\\[#$bb\\]\\].*$/s", '', $text, 1);
   return $text;
 }
 
