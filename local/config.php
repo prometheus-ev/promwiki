@@ -92,6 +92,9 @@ $LinkPageCreateFmt = "<a class='createlinktext' href='\$PageUrl?action=edit'>\$L
 ## Require Author
 $EnablePostAuthorRequired = 1;
 
+## http://www.pmwiki.org/wiki/PmWiki/Drafts
+$EnableDrafts = 1;
+
 ##  Setting $EnableDiag turns on the ?action=diag and ?action=phpinfo
 ##  actions, which often helps the PmWiki authors to troubleshoot 
 ##  various configuration and execution problems.
