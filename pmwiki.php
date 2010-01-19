@@ -1,7 +1,7 @@
 <?php
 /*
     PmWiki
-    Copyright 2001-2009 Patrick R. Michaud
+    Copyright 2001-2010 Patrick R. Michaud
     pmichaud@pobox.com
     http://www.pmichaud.com/
 
@@ -174,6 +174,7 @@ $HTMLDoctypeFmt =
   <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'><head>\n";
 $HTMLStylesFmt['pmwiki'] = "
   ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
+  code.escaped { white-space: nowrap; }
   .vspace { margin-top:1.33em; }
   .indent { margin-left:40px; }
   .outdent { margin-left:40px; text-indent:-40px; }
@@ -596,6 +597,8 @@ function FixGlob($x, $rep = '$1*.$2') {
 ## regexes to include ('/'), regexes to exclude ('!'), or
 ## wildcard patterns (all others).
 function MatchPageNames($pagelist, $pat) {
+  global $Charset;
+  $pcre8 = ($Charset == 'UTF-8')? 'u' : ''; # allow range matches in utf8
   $pagelist = (array)$pagelist;
   foreach((array)$pat as $p) {
     if (count($pagelist) < 1) break;
@@ -610,9 +613,9 @@ function MatchPageNames($pagelist, $pat) {
       default:
         list($inclp, $exclp) = GlobToPCRE(str_replace('/', '.', $p));
         if ($exclp) 
-          $pagelist = array_diff($pagelist, preg_grep("/$exclp/i", $pagelist));
+          $pagelist = array_diff($pagelist, preg_grep("/$exclp/i$pcre8", $pagelist));
         if ($inclp)
-          $pagelist = preg_grep("/$inclp/i", $pagelist);
+          $pagelist = preg_grep("/$inclp/i$pcre8", $pagelist);
     }
   }
   return $pagelist;
@@ -707,8 +710,9 @@ function PCache($pagename, $page) {
 ## SetProperty saves a page property into $PCache.  For convenience
 ## it returns the $value of the property just set.  If $sep is supplied,
 ## then $value is appended to the current property (with $sep as
-## as separator) instead of replacing it.
-function SetProperty($pagename, $prop, $value, $sep = NULL) {
+## as separator) instead of replacing it. If $keep is suplied and the 
+## property already exists, then $value will be ignored.
+function SetProperty($pagename, $prop, $value, $sep=NULL, $keep=NULL) {
   global $PCache, $KeepToken;
   NoCache();
   $prop = "=p_$prop";
@@ -716,8 +720,9 @@ function SetProperty($pagename, $prop, $value, $sep = NULL) {
                         "\$GLOBALS['KPV']['$1']", $value);
   if (!is_null($sep) && isset($PCache[$pagename][$prop]))
     $value = $PCache[$pagename][$prop] . $sep . $value;
-  $PCache[$pagename][$prop] = $value;
-  return $value;
+  if (is_null($keep) || !isset($PCache[$pagename][$prop]))
+    $PCache[$pagename][$prop] = $value;
+  return $PCache[$pagename][$prop];
 }
 
 
@@ -735,7 +740,8 @@ function PageTextVar($pagename, $var) {
     $page = RetrieveAuthPage($pagename, 'read', false, READPAGE_CURRENT);
     if ($page) {
       foreach((array)$PageTextVarPatterns as $pat) 
-        if (preg_match_all($pat, @$page['text'], $match, PREG_SET_ORDER))
+        if (preg_match_all($pat, IsEnabled($PCache[$pagename]['=preview'],@$page['text']), 
+          $match, PREG_SET_ORDER))
           foreach($match as $m) {
             $t = preg_replace("/\\{\\$:{$m[2]}\\}/", '', $m[3]);
             $pc["=p_{$m[2]}"] = Qualify($pagename, $t);
@@ -1195,7 +1201,7 @@ function TextSection($text, $sections, $args = NULL) {
     $text = substr($text, $pos);
   }
   if ($bb)
-    $text = preg_replace("/\\[\\[#$bb\\]\\].*$/s", '', $text, 1);
+    $text = preg_replace("/(\n)[^\n]*\\[\\[#$bb\\]\\].*$/s", '$1', $text, 1);
   return $text;
 }
 
@@ -1207,7 +1213,7 @@ function TextSection($text, $sections, $args = NULL) {
 ##  The selected page is placed in the global $RASPageName variable.
 ##  The caller is responsible for calling Qualify() as needed.
 function RetrieveAuthSection($pagename, $pagesection, $list=NULL, $auth='read') {
-  global $RASPageName;
+  global $RASPageName, $PCache;
   if ($pagesection{0} != '#')
     $list = array(MakePageName($pagename, $pagesection));
   else if (is_null($list)) $list = array($pagename);
@@ -1216,7 +1222,7 @@ function RetrieveAuthSection($pagename, $pagesection, $list=NULL, $auth='read') 
     if (!PageExists($t)) continue;
     $tpage = RetrieveAuthPage($t, $auth, false, READPAGE_CURRENT);
     if (!$tpage) continue;
-    $text = TextSection($tpage['text'], $pagesection);
+    $text = TextSection(IsEnabled($PCache[$t]['=preview'],$tpage['text']),$pagesection);
     if ($text !== false) { $RASPageName = $t; return $text; }
   }
   $RASPageName = '';
@@ -1224,7 +1230,7 @@ function RetrieveAuthSection($pagename, $pagesection, $list=NULL, $auth='read') 
 }
 
 function IncludeText($pagename, $inclspec) {
-  global $MaxIncludes, $IncludeOpt, $InclCount;
+  global $MaxIncludes, $IncludeOpt, $InclCount, $PCache;
   SDV($MaxIncludes,50);
   SDVA($IncludeOpt, array('self'=>1));
   $npat = '[[:alpha:]][-\\w]*';
@@ -1238,7 +1244,7 @@ function IncludeText($pagename, $inclspec) {
         $iname = MakePageName($pagename, $v);
         if (!$args['self'] && $iname == $pagename) continue;
         $ipage = RetrieveAuthPage($iname, 'read', false, READPAGE_CURRENT);
-        $itext = @$ipage['text'];
+        $itext = IsEnabled($PCache[$iname]['=preview'], @$ipage['text']);
       }
       $itext = TextSection($itext, $v, array('anchors' => 1));
       continue;
@@ -1638,6 +1644,8 @@ function RestorePage($pagename,&$page,&$new,$restore=NULL) {
   }
   if ($nl) $t[]='';
   $new['text']=implode("\n",$t);
+  $new['=preview'] = $new['text'];
+  PCache($pagename, $new);
   return $new['text'];
 }
 
@@ -1649,9 +1657,12 @@ function ReplaceOnSave($pagename,&$page,&$new) {
   global $EnablePost, $ROSPatterns, $ROEPatterns;
   foreach ((array)@$ROEPatterns as $pat => $rep)
     $new['text'] = preg_replace($pat, $rep, $new['text']);
-  if (!$EnablePost) return;
-  foreach((array)@$ROSPatterns as $pat=>$rep) 
-    $new['text'] = preg_replace($pat, $rep, $new['text']);
+  if ($EnablePost) {
+    foreach((array)@$ROSPatterns as $pat=>$rep) 
+      $new['text'] = preg_replace($pat, $rep, $new['text']);
+  }
+  $new['=preview'] = $new['text'];
+  PCache($pagename, $new);
 }
 
 function SaveAttributes($pagename,&$page,&$new) {
@@ -1673,7 +1684,7 @@ function SaveAttributes($pagename,&$page,&$new) {
 
 function PostPage($pagename, &$page, &$new) {
   global $DiffKeepDays, $DiffFunction, $DeleteKeyPattern, $EnablePost,
-    $Now, $Charset, $Author, $WikiDir, $IsPagePosted;
+    $Now, $Charset, $Author, $WikiDir, $IsPagePosted, $DiffKeepNum;
   SDV($DiffKeepDays,3650);
   SDV($DeleteKeyPattern,"^\\s*delete\\s*$");
   $IsPagePosted = false;
@@ -1687,9 +1698,11 @@ function PostPage($pagename, &$page, &$new) {
       $new["diff:$Now:{$page['time']}:$diffclass"] =
         $DiffFunction($new['text'],@$page['text']);
     $keepgmt = $Now-$DiffKeepDays * 86400;
+    $keepnum = IsEnabled($DiffKeepNum, 20);
     $keys = array_keys($new);
     foreach($keys as $k)
-      if (preg_match("/^\\w+:(\\d+)/",$k,$match) && $match[1]<$keepgmt)
+      if (preg_match("/^\\w+:(\\d+)/",$k,$match) 
+        && --$keepnum<0 && $match[1]<$keepgmt)
         unset($new[$k]);
     if (preg_match("/$DeleteKeyPattern/",$new['text'])){
       if(@$new['passwdattr']>'' && !CondAuth($pagename, 'attr'))
@@ -1756,13 +1769,14 @@ function HandleEdit($pagename, $auth = 'edit') {
   Lock(2);
   $page = RetrieveAuthPage($pagename, $auth, true);
   if (!$page) Abort("?cannot edit $pagename"); 
-  PCache($pagename,$page);
   $new = $page;
   foreach((array)$EditFields as $k) 
     if (isset($_POST[$k])) $new[$k]=str_replace("\r",'',stripmagic($_POST[$k]));
   $new['csum'] = $ChangeSummary;
   if ($ChangeSummary) $new["csum:$Now"] = $ChangeSummary;
   $EnablePost &= preg_grep('/^post/', array_keys(@$_POST));
+  $new['=preview'] = $new['text'];
+  PCache($pagename, $new);
   UpdatePage($pagename, $page, $new);
   Lock(0);
   if ($IsPagePosted && !@$_POST['postedit']) 
@@ -1961,7 +1975,7 @@ function PasswdVar($pagename, $level) {
     if ($page) PCache($pagename, $page);
   }
   SDV($PasswdVarAuth, 'attr');
-  if ($PasswdVarAuth && !@$page['=auth'][$PasswdVarAuth]) return '(protected)';
+  if ($PasswdVarAuth && !@$page['=auth'][$PasswdVarAuth]) return XL('(protected)');
   $pwsource = $page['=pwsource'][$level];
   if (strncmp($pwsource, 'cascade:', 8) == 0) {
     $FmtV['$PWCascade'] = substr($pwsource, 8);

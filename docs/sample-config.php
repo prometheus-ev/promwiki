@@ -58,9 +58,9 @@ $WikiTitle = 'PmWiki';
 ##  "preformatted text blocks", set $EnableWSPre=1 if you want to do
 ##  this.  Setting it to a higher number increases the number of
 ##  space characters required on a line to count as "preformatted text".
-# $EnableWSPre = 0;                        # PmWiki 2.2.0 default (disabled)
-# $EnableWSPre = 1;                        # lines beginning with space are preformatted
-# $EnableWSPre = 4;                        # lines with 4 spaces are preformatted
+# $EnableWSPre = 1;   # lines beginning with space are preformatted (default)
+# $EnableWSPre = 4;   # lines with 4 or more spaces are preformatted
+# $EnableWSPre = 0;   # disabled
 
 ##  If you want uploads enabled on your system, set $EnableUpload=1.
 ##  You'll also need to set a default upload password, or else set
@@ -113,11 +113,10 @@ $WikiTitle = 'PmWiki';
 # if ($action == 'dc')   include_once("scripts/feeds.php");  # Dublin Core
 # if ($action == 'rdf')  include_once("scripts/feeds.php");  # RSS 1.0
 
-##  In the 2.2.0-beta series, {$var} page variables are absolute by
-##  default, but a future version will make them relative.  This setting
-##  sets them out as relative to begin with.  (If you're starting a new
-##  site, it's probably best to leave this setting alone.)
-$EnableRelativePageVars = 1;
+##  In the 2.2.0-beta series, {$var} page variables were absolute, but now
+##  relative page variables provide greater flexibility and are recommended.
+##  (If you're starting a new site, it's best to leave this setting alone.)
+# $EnableRelativePageVars = 1; # 1=relative; 0=absolute
 
 ##  By default, pages in the Category group are manually created.
 ##  Uncomment the following line to have blank category pages
