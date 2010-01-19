@@ -6,6 +6,6 @@ host=141.54.174.149
 name=PmWikiDe.ListeAllerSeiten
 rev=13
 targets=
-text=(:title Liste aller deutschen Seiten:)%0aÜbersicht der Seiten der deutschen Übersetzung. Zuletzt bearbeitete Seiten befinden sich unten, potentiell überarbeitungswürdige Seiten am Anfang der Liste.%0a%0a(:pagelist group=PmWikiDe fmt=#title order=time list=normal:)%0a%0a%25comment%25Warum ist die Seite eigentlich nicht in alphabetischer Reihenfolge und sondern in last Change? und Warum wenn schon so, die neuesten am Schluss ??%0a%0a%25comment%25?? %0a%0a%25comment%25Meine Frage zielte darauf ab, ob es möglich solche von pmwiki erzeugten Indexe auch anders auszugeben und wenn es möglich ist, warum dann Dieser in einer eigentlich so dämlichen Sortierung vorliegt.
+text=(:title Liste aller deutschen Seiten:)%0aÃœbersicht der Seiten der deutschen Ãœbersetzung. Zuletzt bearbeitete Seiten befinden sich unten, potentiell Ã¼berarbeitungswÃ¼rdige Seiten am Anfang der Liste.%0a%0a(:pagelist group=PmWikiDe fmt=#title order=time list=normal:)%0a%0a%25comment%25Warum ist die Seite eigentlich nicht in alphabetischer Reihenfolge und sondern in last Change? und Warum wenn schon so, die neuesten am Schluss ??%0a%0a%25comment%25?? %0a%0a%25comment%25Meine Frage zielte darauf ab, ob es mÃ¶glich solche von pmwiki erzeugten Indexe auch anders auszugeben und wenn es mÃ¶glich ist, warum dann Dieser in einer eigentlich so dÃ¤mlichen Sortierung vorliegt.
 time=1168660236
 title=Liste aller deutschen Seiten

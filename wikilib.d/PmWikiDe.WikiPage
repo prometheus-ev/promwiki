@@ -7,6 +7,6 @@ host=212.80.246.17
 name=PmWikiDe.WikiPage
 rev=4
 targets=PmWikiDe.WikiWikiWeb,PmWikiDe.WikiStructure
-text=(:title Wiki-Seite:)%0a%0aEine WikiSeite ist der Grundbaustein eines [[WikiWikiWeb|+]] und enthält Text und Bilder.%0a%0aMehr Information darüber bei [[WikiStructure|+]] und [[WikiWikiWeb|+]]. %0a%0a%25trail%25 %3c%3c|PmWikiDe.DokumentationsIndex|>>
+text=(:title Wiki-Seite:)%0a%0aEine WikiSeite ist der Grundbaustein eines [[WikiWikiWeb|+]] und enthÃ¤lt Text und Bilder.%0a%0aMehr Information darÃ¼ber bei [[WikiStructure|+]] und [[WikiWikiWeb|+]]. %0a%0a%25trail%25 %3c%3c|PmWikiDe.DokumentationsIndex|>>
 time=1173029362
 title=Wiki-Seite
