@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -49,19 +49,60 @@ Markup('$[phrase]', '>[=',
 
 # {$var} substitutions
 Markup('{$var}', '>$[phrase]',
-  '/\\{(!?[-\\w.\\/]*)(\\$\\w+)\\}/e', 
-  "htmlspecialchars(PageVar(\$pagename, '$2', '$1'), ENT_NOQUOTES)");
-# {*$var} substitutions, backported from 2.2.0
-Markup('{*$var}', '<{$var}', '/\\{\\*\\$/e', "'{'.\$pagename.'$'");
+  '/\\{(\\*|!?[-\\w.\\/\\x80-\\xff]*)(\\$:?\\w+)\\}/e', 
+  "PRR(PVSE(PageVar(\$pagename, '$2', '$1')))");
 
-Markup('if', 'fulltext',
-  "/\\(:(if[^\n]*?):\\)(.*?)(?=\\(:if[^\n]*?:\\)|$)/sei",
-  "CondText(\$pagename,PSS('$1'),PSS('$2'))");
+# invisible (:textvar:...:) definition
+Markup('textvar:', '<split',
+  '/\\(:\\w[-\\w]*:(?!\\)).*?:\\)/s', '');
+
+## handle relative text vars in includes
+if (IsEnabled($EnableRelativePageVars, 0)) 
+  SDV($QualifyPatterns["/\\{([-\\w\\x80-\\xfe]*)(\\$:?\\w+\\})/e"], 
+    "'{' . ('$1' ? MakePageName(\$pagename, '$1') : \$pagename) . '$2'");
+
+## character entities
+Markup('&','<if','/&amp;(?>([A-Za-z0-9]+|#\\d+|#[xX][A-Fa-f0-9]+));/',
+  '&$1;');
+Markup('&amp;amp;', '<&', '/&amp;amp;/', Keep('&amp;'));
+
+
+## (:if:)/(:elseif:)/(:else:)
+SDV($CondTextPattern, 
+  "/ \\(:if (\d*) (?:end)? \\b[^\n]*?:\\)
+     .*?
+     (?: \\(: (?:if\\1|if\\1end) \\s* :\\)
+     |   (?=\\(:(?:if\\1|if\\1end)\\b[^\n]*?:\\) | $)
+     )
+   /seix");
+SDV($CondTextReplacement, "CondText2(\$pagename, PSS('$0'), '$1')");
+Markup('if', 'fulltext', $CondTextPattern, $CondTextReplacement);
+
+function CondText2($pagename, $text, $code = '') {
+  global $Conditions, $CondTextPattern, $CondTextReplacement;
+  $if = "if$code";
+  
+  $parts = preg_split("/\\(:(?:{$if}end|$if|else *$if|else$code)\\b\\s*(.*?)\\s*:\\)/", 
+                      $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+  $x = array_shift($parts);
+  while ($parts) {
+    list($condspec, $condtext) = array_splice($parts, 0, 2);
+    if (!preg_match("/^\\s*(!?)\\s*(\\S*)\\s*(.*?)\\s*$/", $condspec, $match)) continue;
+    list($x, $not, $condname, $condparm) = $match;
+    if (!isset($Conditions[$condname])) 
+      return preg_replace($CondTextPattern, $CondTextReplacement, $condtext);
+    $tf = @eval("return ({$Conditions[$condname]});");
+    if ($tf xor $not)
+      return preg_replace($CondTextPattern, $CondTextReplacement, $condtext);
+  }
+  return '';
+}
+
 
 ## (:include:)
 Markup('include', '>if',
   '/\\(:include\\s+(\\S.*?):\\)/ei',
-  "PRR(IncludeText(\$pagename, '$1'))");
+  "PRR(IncludeText(\$pagename, PSS('$1')))");
 
 ## (:redirect:)
 Markup('redirect', '<include',
@@ -139,21 +180,17 @@ Markup('messages', 'directives',
 ## (:comment:)
 Markup('comment', 'directives', '/\\(:comment .*?:\\)/i', '');
 
-## character entities
-Markup('&','directives','/&amp;(?>([A-Za-z0-9]+|#\\d+|#[xX][A-Fa-f0-9]+));/',
-  '&$1;');
-
 ## (:title:)
-Markup('title','>&',
+Markup('title','directives',
   '/\\(:title\\s(.*?):\\)/ei',
   "PZZ(PCache(\$pagename, 
          \$zz=array('title' => SetProperty(\$pagename, 'title', PSS('$1')))))");
 
 ## (:keywords:), (:description:)
-Markup('keywords', '>&', 
+Markup('keywords', 'directives', 
   "/\\(:keywords?\\s+(.+?):\\)/ei",
   "PZZ(SetProperty(\$pagename, 'keywords', PSS('$1'), ', '))");
-Markup('description', '>&',
+Markup('description', 'directives',
   "/\\(:description\\s+(.+?):\\)/ei",
   "PZZ(SetProperty(\$pagename, 'description', PSS('$1'), '\n'))");
 $HTMLHeaderFmt['meta'] = 'function:PrintMetaTags';
@@ -227,6 +264,9 @@ Markup('[[->','>[[|',
   "/(?>\\[\\[([^\\]]+?)\\s*-+&gt;\\s*)(.*?)\\]\\]($SuffixPattern)/e",
   "Keep(MakeLink(\$pagename,PSS('$2'),PSS('$1'),'$3'),'L')");
 
+if (IsEnabled($EnableRelativePageLinks, 1))
+  SDV($QualifyPatterns['/(\\[\\[(?>[^\\]]+?->)?\\s*)([-\\w\\x80-\\xfe\\s\'()]+([|#?].*?)?\\]\\])/e'], "PSS('$1').\$group.PSS('/$2')");
+
 ## [[#anchor]]
 Markup('[[#','<[[','/(?>\\[\\[#([A-Za-z][-.:\\w]*))\\]\\]/e',
   "Keep(TrackAnchors('$1') ? '' : \"<a name='$1' id='$1'></a>\", 'L')");
@@ -261,12 +301,11 @@ Markup('img','<urllink',
     \$GLOBALS['ImgTagFmt']),'L')");
 
 ## bare wikilinks
-Markup('wikilink', '>urllink',
-  "/\\b($GroupPattern([\\/.]))?($WikiWordPattern)/e",
-  "Keep('<span class=\\'wikiword\\'>'.WikiLink(\$pagename,'$0').'</span>',
-        'L')");
+##    v2.2: markup rule moved to scripts/wikiwords.php)
+Markup('wikilink', '>urllink');
 
-## escaped `WikiWords
+## escaped `WikiWords 
+##    v2.2: rule kept here for markup compatibility with 2.1 and earlier
 Markup('`wikiword', '<wikilink',
   "/`(($GroupPattern([\\/.]))?($WikiWordPattern))/e",
   "Keep('$1')");
@@ -292,7 +331,7 @@ Markup('^img', 'block',
 
 ## Whitespace at the beginning of lines can be used to maintain the
 ## indent level of a previous list item, or a preformatted text block.
-Markup('^ws', '<^img', '/^(\\s+)/e', "WSIndent('$1')");
+Markup('^ws', '<^img', '/^\\s+ #1/ex', "WSIndent('$0')");
 function WSIndent($i) {
   global $MarkupFrame;
   $icol = strlen($i);
@@ -302,12 +341,16 @@ function WSIndent($i) {
       $MarkupFrame[0]['icol'] = $icol;
       return '';
     }
-  return "<:pre,1>$i";
+  return $i;
 }
 
-## If the ^ws rule is disabled, then leading whitespace is a
-## preformatted text block.
-Markup('^ ','block','/^(\\s)/','<:pre,1>$1');
+## The $EnableWSPre setting uses leading spaces on markup lines to indicate
+## blocks of preformatted text.
+SDV($EnableWSPre, 1);
+Markup('^ ', 'block', 
+  '/^\\s+ #2/ex',
+  "(\$GLOBALS['EnableWSPre'] > 0 && strlen('$0') >= \$GLOBALS['EnableWSPre']) 
+     ? '<:pre,1>$0' : '$0'");
 
 ## bullet lists
 Markup('^*','block','/^(\\*+)\\s?(\\s*)/','<:ul,$1,$0>$2');
@@ -362,7 +405,7 @@ function Cells($name,$attr) {
     if (!@$cf['table']) {
        $tattr = @$MarkupFrame[0]['tattr'];
        $out .= "<table $tattr><tr><td $attr>";
-       $cf['table'] = '</td></tr></table><!---->';
+       $cf['table'] = '</td></tr></table>';
     } else if ($name == 'cellnr') $out .= "</td></tr><tr><td $attr>";
     else $out .= "</td><td $attr>";
     $cf['cell'] = '';
@@ -386,6 +429,8 @@ Markup('^>><<', '<^>>',
 #### special stuff ####
 ## (:markup:) for displaying markup examples
 function MarkupMarkup($pagename, $text, $opt = '') {
+  global $MarkupWordwrapFunction;
+  SDV($MarkupWordwrapFunction, 'wordwrap');
   $MarkupMarkupOpt = array('class' => 'vert');
   $opt = array_merge($MarkupMarkupOpt, ParseArgs($opt));
   $html = MarkupToHTML($pagename, $text, array('escape' => 0));
@@ -394,10 +439,10 @@ function MarkupMarkup($pagename, $text, $opt = '') {
                            "<caption>{$opt['caption']}</caption>");
   $class = preg_replace('/[^-\\s\\w]+/', ' ', @$opt['class']);
   if (strpos($class, 'horiz') !== false) 
-    { $sep = ''; $pretext = wordwrap($text, 40); } 
+    { $sep = ''; $pretext = $MarkupWordwrapFunction($text, 40); } 
   else 
-    { $sep = '</tr><tr>'; $pretext = wordwrap($text, 75); }
-  return Keep("<table class='markup $class' align='center'>$caption
+    { $sep = '</tr><tr>'; $pretext = $MarkupWordwrapFunction($text, 75); }
+  return Keep(@"<table class='markup $class' align='center'>$caption
       <tr><td class='markup1' valign='top'><pre>$pretext</pre></td>$sep<td 
         class='markup2' valign='top'>$html</td></tr></table>");
 }
@@ -417,6 +462,10 @@ SDV($HTMLStylesFmt['markup'], "
   table.markup caption { text-align:left; }
   div.faq p, div.faq pre { margin-left:2em; }
   div.faq p.question { margin:1em 0 0.75em 0; font-weight:bold; }
+  div.faqtoc div.faq * { display:none; }
+  div.faqtoc div.faq p.question 
+    { display:block; font-weight:normal; margin:0.5em 0 0.5em 20px; line-height:normal; }
+  div.faqtoc div.faq p.question * { display:inline; }
   ");
 
 #### Special conditions ####
@@ -425,25 +474,22 @@ $Conditions['date'] = "CondDate(\$condparm)";
 
 function CondDate($condparm) {
   global $Now;
-  NoCache();
-  if (!preg_match('/^(.*?)(\\.\\.(.*))?$/', $condparm, $match)) return false;
-  if ($match[2]) {
-    $t0 = $match[1];  if ($t0 == '') $t0 = '19700101';
-    $t1 = $match[3];  if ($t1 == '') $t1 = '20380101';
-  } else $t0 = $t1 = $match[1];
-  $t0 = preg_replace('/\\D/', '', $t0);
-  if (!preg_match('/^(\\d{4})(\\d\\d)(\\d\\d)$/', $t0, $m)) return false;
-  $g0 = mktime(0, 0, 0, $m[2], $m[3], $m[1]);
-  if ($Now < $g0) return false;
-
-  $t1 = preg_replace('/\\D/', '', $t1);
-  $t1++;
-  if (!preg_match('/^(\\d{4})(\\d\\d)(\\d\\d)$/', $t1, $m)) return false;
-  $g1 = mktime(0, 0, 0, $m[2], $m[3], $m[1]);
-  if ($Now >= $g1) return false;
+  if (!preg_match('/^(\\S*?)(\\.\\.(\\S*))?(\\s+\\S.*)?$/',
+                  trim($condparm), $match))
+    return false;
+  if ($match[4] == '') { $x0 = $Now; NoCache(); }
+  else { list($x0, $x1) = DRange($match[4]); }
+  if ($match[1] > '') {
+    list($t0, $t1) = DRange($match[1]);
+    if ($x0 < $t0) return false;
+    if ($match[2] == '' && $x0 >= $t1) return false;
+  }
+  if ($match[3] > '') {
+    list($t0, $t1) = DRange($match[3]);
+    if ($x0 >= $t1) return false;
+  }
   return true;
 }
-
 
 # This pattern enables the (:encrypt <phrase>:) markup/replace-on-save
 # pattern.

@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2005-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2005-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -31,7 +31,6 @@
 # let Site.AuthForm know that we're doing user-based authorization
 $EnableAuthUser = 1;
 
-$pagename = ResolvePageName($pagename);
 if (@$_POST['authid']) 
   AuthUserId($pagename, stripmagic(@$_POST['authid']), 
              stripmagic(@$_POST['authpw']));
@@ -41,11 +40,12 @@ function AuthUserId($pagename, $id, $pw=NULL) {
   global $AuthUser, $AuthUserPageFmt, $AuthUserFunctions, 
     $AuthId, $MessagesFmt;
 
+  $auth = array();
   foreach((array)$AuthUser as $k=>$v) $auth[$k] = (array)$v;
   $authid = '';
 
-  # load information from Site.AuthUser (or page in $AuthUserPageFmt)
-  SDV($AuthUserPageFmt, '$SiteGroup.AuthUser');
+  # load information from SiteAdmin.AuthUser (or page in $AuthUserPageFmt)
+  SDV($AuthUserPageFmt, '$SiteAdminGroup.AuthUser');
   SDVA($AuthUserFunctions, array(
     'htpasswd' => 'AuthUserHtPasswd',
     'ldap' => 'AuthUserLDAP',
@@ -65,10 +65,10 @@ function AuthUserId($pagename, $id, $pw=NULL) {
     }
   }
 
-  if (is_null($pw)) $authid = $id;
-  else 
+  if (func_num_args()==2) $authid = $id;
+  else
     foreach($AuthUserFunctions as $k => $fn) 
-      if ($auth[$k] && $fn($pagename, $id, $pw, $auth[$k])) 
+      if (@$auth[$k] && $fn($pagename, $id, $pw, $auth[$k])) 
         { $authid = $id; break; }
 
   if (!$authid) { $GLOBALS['InvalidLogin'] = 1; return; }
@@ -101,7 +101,7 @@ function AuthUserHtPasswd($pagename, $id, $pw, $pwlist) {
     $fp = fopen($f, "r"); if (!$fp) continue;
     while ($x = fgets($fp, 1024)) {
       $x = rtrim($x);
-      list($i, $c, $r) = explode(':', $x, 3);
+      @list($i, $c, $r) = explode(':', $x, 3);
       if ($i == $id && _crypt($pw, $c) == $c) { fclose($fp); return true; }
     }
     fclose($fp);
@@ -129,23 +129,32 @@ function AuthUserHtGroup($pagename, $id, $pw, $pwlist) {
 function AuthUserLDAP($pagename, $id, $pw, $pwlist) {
   global $AuthLDAPBindDN, $AuthLDAPBindPassword;
   if (!$pw) return false;
-  if (!function_exists('ldap_connect')) return false;
+  if (!function_exists('ldap_connect')) 
+    Abort('authuser: LDAP authentication requires PHP ldap functions','ldapfn');
   foreach ((array)$pwlist as $ldap) {
-    if (!preg_match('!(ldaps?://[^/]+)/(.+)$!', $ldap, $match))
+    if (!preg_match('!(ldaps?://[^/]+)/(.*)$!', $ldap, $match))
       continue;
+    ##  connect to the LDAP server
     list($z, $url, $path) = $match;
+    $ds = ldap_connect($url);
+    ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ##  For Active Directory, don't specify a path and we simply
+    ##  attempt to bind with the username and password directly
+    if (!$path && @ldap_bind($ds, $id, $pw)) { ldap_close($ds); return true; }
+    ##  Otherwise, we use Apache-style urls for LDAP authentication
+    ##  Split the path into its search components
     list($basedn, $attr, $sub, $filter) = explode('?', $path);
     if (!$attr) $attr = 'uid';
     if (!$sub) $sub = 'one';
     if (!$filter) $filter = '(objectClass=*)';
     $binddn = @$AuthLDAPBindDN;
     $bindpw = @$AuthLDAPBindPassword;
-    $ds = ldap_connect($url);
-    ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
     if (ldap_bind($ds, $binddn, $bindpw)) {
+      ##  Search for the appropriate uid
       $fn = ($sub == 'sub') ? 'ldap_search' : 'ldap_list';
       $sr = $fn($ds, $basedn, "(&$filter($attr=$id))", array($attr));
       $x = ldap_get_entries($ds, $sr);
+      ##  If we find a unique id, bind to it for success
       if ($x['count'] == 1) {
         $dn = $x[0]['dn'];
         if (@ldap_bind($ds, $dn, $pw)) { ldap_close($ds); return true; }

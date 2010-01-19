@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2002-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2002-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -39,18 +39,31 @@ SDVA($SaveAttrPatterns, array(
    '/<\\|([^|]+|\\[\\[(.+?)\\]\\])\\|>/' => '$1',
    '/\\^\\|([^|]+|\\[\\[(.+?)\\]\\])\\|\\^/' => '$1'));
 
-function ReadTrail($pagename,$trailname) {
-  global $SuffixPattern,$GroupPattern,$WikiWordPattern,$LinkWikiWords;
+$Conditions['ontrail'] = 'CondOnTrail($pagename, $condparm)';
+
+function CondOnTrail($pagename, $condparm) {
+  @list($trailname, $pn) = preg_split('/\\s+/', $condparm, 2);
+  $trail = ReadTrail($pagename, $trailname);
+  if (!$trail) return false;
+  $pn = ($pn > '') ? MakePageName($pagename, $pn) : $pagename;
+  foreach($trail as $t)
+    if ($t['pagename'] == $pn) return true;
+  return false;
+}
+
+function ReadTrail($pagename, $trailname) {
+  global $RASPageName, $SuffixPattern, $GroupPattern, $WikiWordPattern,
+    $LinkWikiWords;
   if (preg_match('/^\\[\\[(.+?)(-&gt;|\\|)(.+?)\\]\\]$/', $trailname, $m)) 
     $trailname = ($m[2] == '|') ? $m[1] : $m[3];
-  $trailname = MakePageName($pagename,$trailname);
-  $trailpage = ReadPage($trailname, READPAGE_CURRENT);
-  if (!$trailpage) return false;
+  $trailtext = RetrieveAuthSection($pagename, $trailname);
+  $trailname = $RASPageName;
+  $trailtext = Qualify($trailname, $trailtext);
   $t = array();
   $n = 0;
-  foreach(explode("\n", htmlspecialchars(@$trailpage['text'], ENT_NOQUOTES)) 
+  foreach(explode("\n", htmlspecialchars(@$trailtext, ENT_NOQUOTES)) 
           as $x) {
-    $x = preg_replace("/\\[\\[([^\\]]*)->([^\\]]*)\\]\\]/",'[[$2|$1]]',$x);
+    $x = preg_replace("/\\[\\[([^\\]]*)-&gt;([^\\]]*)\\]\\]/",'[[$2|$1]]',$x);
     if (!preg_match("/^([#*:]+) \\s* 
           (\\[\\[([^:#!|][^|:]*?)(\\|.*?)?\\]\\]($SuffixPattern)
           | (($GroupPattern([\\/.]))?$WikiWordPattern)) (.*)/x",$x,$match))
@@ -109,6 +122,6 @@ function MakeTrailPath($pagename,$trailname) {
       return "<span class='wikitrail'>$trailname$crumbs</span>";
     }
   }
-  return $trailname;
+  return "<span class='wikitrail'>$trailname</span>";
 }
 

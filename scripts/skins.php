@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2007 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -40,12 +40,12 @@ foreach((array)$PageCSSListFmt as $k=>$v)
 # the $skin array.
 function SetSkin($pagename, $skin) {
   global $Skin, $SkinLibDirs, $SkinDir, $SkinDirUrl, 
-    $IsTemplateLoaded, $PubDirUrl, $FarmPubDirUrl, $FarmD;
+    $IsTemplateLoaded, $PubDirUrl, $FarmPubDirUrl, $FarmD, $GCount;
   SDV($SkinLibDirs, array(
     "./pub/skins/\$Skin"      => "$PubDirUrl/skins/\$Skin",
     "$FarmD/pub/skins/\$Skin" => "$FarmPubDirUrl/skins/\$Skin"));
   foreach((array)$skin as $sfmt) {
-    $Skin = FmtPageName($sfmt, $pagename);
+    $Skin = FmtPageName($sfmt, $pagename); $GCount = 0;
     foreach($SkinLibDirs as $dirfmt => $urlfmt) {
       $SkinDir = FmtPageName($dirfmt, $pagename);
       if (is_dir($SkinDir)) 
@@ -68,6 +68,7 @@ function SetSkin($pagename, $skin) {
     LoadPageTemplate($pagename, "$SkinDir/skin.tmpl");
   else if (($dh = opendir($SkinDir))) {
     while (($fname = readdir($dh)) !== false) {
+      if ($fname[0] == '.') continue;
       if (substr($fname, -5) != '.tmpl') continue;
       if ($IsTemplateLoaded) 
         Abort("?unable to find unique template in $SkinDir");
@@ -75,37 +76,43 @@ function SetSkin($pagename, $skin) {
     }
     closedir($dh);
   }
-  if (!$IsTemplateLoaded) Abort("Unable to load $Skin template");
+  if (!$IsTemplateLoaded) Abort("Unable to load $Skin template", 'skin');
 }
 
 
 # LoadPageTemplate loads a template into $TmplFmt
 function LoadPageTemplate($pagename,$tfilefmt) {
-  global $PageStartFmt, $PageEndFmt, $HTMLHeaderFmt, $HTMLFooterFmt,
+  global $PageStartFmt, $PageEndFmt, 
+    $EnableSkinDiag, $HTMLHeaderFmt, $HTMLFooterFmt,
     $IsTemplateLoaded, $TmplFmt, $TmplDisplay,
-    $PageTextStartFmt, $PageTextEndFmt;
-
-  # $BasicLayoutVars is deprecated
-  global $BasicLayoutVars;
-  if (isset($BasicLayoutVars)) 
-    foreach($BasicLayoutVars as $sw) $TmplDisplay[$sw] = 1;
+    $PageTextStartFmt, $PageTextEndFmt, $SkinDirectivesPattern;
 
   SDV($PageTextStartFmt, "\n<div id='wikitext'>\n");
   SDV($PageTextEndFmt, "</div>\n");
+  SDV($SkinDirectivesPattern, 
+      "[[<]!--((?:wiki|file|function|markup):.*?)--[]>]");
 
   $sddef = array('PageEditFmt' => 0);
-  $k = implode('',file(FmtPageName($tfilefmt,$pagename)));
+  $k = implode('', file(FmtPageName($tfilefmt, $pagename)));
+
+  if (IsEnabled($EnableSkinDiag, 0)) {
+    if (!preg_match('/<!--((No)?(HT|X)MLHeader|HeaderText)-->/i', $k))
+      Abort("Skin template missing &lt;!--HTMLHeader--&gt;", 'htmlheader');
+    if (!preg_match('/<!--(No)?(HT|X)MLFooter-->/i', $k))
+      Abort("Skin template missing &lt;!--HTMLFooter--&gt;", 'htmlheader');
+  }
+
   $sect = preg_split(
     '#[[<]!--(/?(?:Page[A-Za-z]+Fmt|(?:HT|X)ML(?:Head|Foot)er|HeaderText|PageText).*?)--[]>]#',
     $k, 0, PREG_SPLIT_DELIM_CAPTURE);
   $TmplFmt['Start'] = array_merge(array('headers:'),
-    preg_split('/[[<]!--((?:wiki|file|function|markup):.*?)--[]>]/s',
+    preg_split("/$SkinDirectivesPattern/s",
       array_shift($sect),0,PREG_SPLIT_DELIM_CAPTURE));
   $TmplFmt['End'] = array($PageTextEndFmt);
   $ps = 'Start';
   while (count($sect)>0) {
     $k = array_shift($sect);
-    $v = preg_split('/[[<]!--((?:wiki|file|function|markup):.*?)--[]>]/',
+    $v = preg_split("/$SkinDirectivesPattern/s",
       array_shift($sect),0,PREG_SPLIT_DELIM_CAPTURE);
     $TmplFmt[$ps][] = "<!--$k-->";
     if ($k{0} == '/') 

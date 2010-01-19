@@ -31,7 +31,7 @@
 
 $LinkFunctions['http:'] = 'LinkHTTP';
 $LinkFunctions['https:'] = 'LinkHTTP';
-SDV($ApprovedUrlPagesFmt, array('$SiteGroup.ApprovedUrls'));
+SDV($ApprovedUrlPagesFmt, array('$SiteAdminGroup.ApprovedUrls'));
 SDV($UnapprovedLinkFmt,
   "\$LinkText<a class='apprlink' href='{\$PageUrl}?action=approvesites'>$[(approve sites)]</a>");
 $HTMLStylesFmt['urlapprove'] = '.apprlink { font-size:smaller; }';
@@ -46,22 +46,24 @@ SDV($UnapprovedLinkCountMax, 1000000);
 array_splice($EditFunctions, array_search('PostPage', $EditFunctions),
   0, 'BlockUnapprovedPosts');
 
-function LinkHTTP($pagename,$imap,$path,$title,$txt,$fmt=NULL) {
+function LinkHTTP($pagename,$imap,$path,$alt,$txt,$fmt=NULL) {
   global $EnableUrlApprovalRequired, $IMap, $WhiteUrlPatterns, $FmtV,
-    $UnapprovedLinkCount, $UnapprovedLinkFmt;
+    $UnapprovedLink, $UnapprovedLinkCount, $UnapprovedLinkFmt;
   if (!IsEnabled($EnableUrlApprovalRequired,1))
-    return LinkIMap($pagename,$imap,$path,$title,$txt,$fmt);
+    return LinkIMap($pagename,$imap,$path,$alt,$txt,$fmt);
   static $havereadpages;
   if (!$havereadpages) { ReadApprovedUrls($pagename); $havereadpages=true; }
   $p = str_replace(' ','%20',$path);
   $url = str_replace('$1',$p,$IMap[$imap]);
+  if (!isset($UnapprovedLink)) $UnapprovedLink = array();
   foreach((array)$WhiteUrlPatterns as $pat) {
     if (preg_match("!^$pat(/|$)!i",$url))
-      return LinkIMap($pagename,$imap,$path,$title,$txt,$fmt);
+      return LinkIMap($pagename,$imap,$path,$alt,$txt,$fmt);
   }
   $FmtV['$LinkUrl'] = PUE(str_replace('$1',$path,$IMap[$imap]));
   $FmtV['$LinkText'] = $txt;
-  $FmtV['$LinkAlt'] = str_replace(array('"',"'"),array('&#34;','&#39;'),$title);
+  $FmtV['$LinkAlt'] = str_replace(array('"',"'"),array('&#34;','&#39;'),$alt);
+  $UnapprovedLink[] = $url;
   @$UnapprovedLinkCount++;
   return FmtPageName($UnapprovedLinkFmt,$pagename);
 }

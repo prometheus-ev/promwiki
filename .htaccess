@@ -1,5 +1,0 @@
-RewriteEngine On
-RewriteBase /wiki
-RewriteRule ^$           pmwiki.php [L]
-RewriteRule ^index\.php$ pmwiki.php [L]
-RewriteRule ^([A-Z0-9\xa0-\xff].*)$ pmwiki.php?n=$1 [QSA,L]

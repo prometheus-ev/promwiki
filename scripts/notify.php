@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2006-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -47,7 +47,7 @@
 SDV($NotifyDelay, 0);
 SDV($NotifySquelch, 10800);
 SDV($NotifyFile, "$WorkDir/.notifylist");
-SDV($NotifyListPageFmt, '{$SiteGroup}.NotifyList');
+SDV($NotifyListPageFmt, '$SiteAdminGroup.NotifyList');
 SDV($NotifySubjectFmt, '[$WikiTitle] recent notify posts');
 SDV($NotifyBodyFmt, 
   "Recent \$WikiTitle posts:\n" 
@@ -74,28 +74,25 @@ function NotifyCheck($pagename) {
   $nextevent = fgets($nfp);
   fclose($nfp);
   if ($Now < $nextevent && $LastModTime < filemtime($NotifyFile)) return;
-  register_shutdown_function('flush');
   register_shutdown_function('NotifyUpdate', $pagename, getcwd());
 }
 
     
 function PostNotify($pagename, &$page, &$new) {
   global $IsPagePosted;
-  if ($IsPagePosted) {
-    register_shutdown_function('flush');
+  if ($IsPagePosted) 
     register_shutdown_function('NotifyUpdate', $pagename, getcwd());
-  }
 }
 
 
 function NotifyUpdate($pagename, $dir='') {
   global $NotifyList, $NotifyListPageFmt, $NotifyFile, $IsPagePosted,
     $FmtV, $NotifyTimeFmt, $NotifyItemFmt, $SearchPatterns,
-    $NotifySquelch, $NotifyDelay, $Now,
+    $NotifySquelch, $NotifyDelay, $Now, $Charset, $EnableNotifySubjectEncode,
     $NotifySubjectFmt, $NotifyBodyFmt, $NotifyHeaders, $NotifyParameters;
 
   $abort = ignore_user_abort(true);
-  if ($dir) chdir($dir);
+  if ($dir) { flush(); chdir($dir); }
 
   $GLOBALS['EnableRedirect'] = 0;
 
@@ -163,6 +160,9 @@ function NotifyUpdate($pagename, $dir='') {
     $nextevent = $nnow + 86400;
     $mailto = array_keys($notify);
     $subject = FmtPageName($NotifySubjectFmt, $pagename);
+    if(IsEnabled($EnableNotifySubjectEncode, 0)
+      && preg_match("/[^\x20-\x7E]/", $subject))
+        $subject = strtoupper("=?$Charset?B?"). base64_encode($subject)."?=";
     $body = FmtPageName($NotifyBodyFmt, $pagename);
     foreach ($mailto as $m) {
       $msquelch = @$notify[$m]['lastmail'] +
@@ -176,7 +176,10 @@ function NotifyUpdate($pagename, $dir='') {
       if (!$notify[$m]) { unset($notify[$m]); continue; }
       $mbody = str_replace('$NotifyItems',   
                            urldecode(implode("\n", $notify[$m])), $body);
-      mail($m, $subject, $mbody, $NotifyHeaders, $NotifyParameters);
+      if ($NotifyParameters && !@ini_get('safe_mode'))
+        mail($m, $subject, $mbody, $NotifyHeaders, $NotifyParameters);
+      else 
+        mail($m, $subject, $mbody, $NotifyHeaders);
       $notify[$m] = array('lastmail' => $nnow);
     }
   }

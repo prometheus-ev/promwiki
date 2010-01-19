@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2002-2004 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2002-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -15,12 +15,16 @@ SDV($ActionTitleFmt['crypt'],'| $[Password encryption]');
 function HandleCrypt($pagename, $auth='read') {
   global $ScriptUrl,$HTMLStartFmt,$HTMLEndFmt;
   PrintFmt($pagename,$HTMLStartFmt);
-  $passwd = @$_POST["passwd"];
-  echo "<form action='{$PageUrl}' method='POST'><p>
-    Enter password to encrypt: <input type='text' name='passwd' value='$passwd' />
-    <input type='submit' />
-    <input type='hidden' name='n' value='{$FullName}' />
-    <input type='hidden' name='action' value='crypt' /></p></form>";
+  $passwd = stripmagic(@$_POST["passwd"]);
+  echo FmtPageName(
+    "<form action='{\$ScriptUrl}' method='POST'><p>
+      Enter password to encrypt: 
+      <input type='text' name='passwd' value='"
+      . htmlspecialchars($passwd, ENT_QUOTES) ."' />
+      <input type='submit' />
+      <input type='hidden' name='n' value='{\$FullName}' />
+      <input type='hidden' name='action' value='crypt' /></p></form>",
+    $pagename);
   if ($passwd) { 
     $crypt = crypt($passwd);
     echo "<p class='vspace'>Encrypted password = $crypt</p>"; 

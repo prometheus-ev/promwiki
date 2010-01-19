@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -29,7 +29,7 @@ SDVA($UploadExts,array(
   'mpg' => 'video/mpeg', 'mpeg' => 'video/mpeg',
   'mov' => 'video/quicktime', 'qt' => 'video/quicktime',
   'wmf' => 'text/plain', 'avi' => 'video/x-msvideo',
-  'zip' => 'application/zip', 
+  'zip' => 'application/zip', '7z' => 'application/x-7z-compressed',
   'gz' => 'application/x-gzip', 'tgz' => 'application/x-gzip',
   'rpm' => 'application/x-rpm', 
   'hqx' => 'application/mac-binhex40', 'sit' => 'application/x-stuffit',
@@ -44,6 +44,11 @@ SDVA($UploadExts,array(
   'swf' => 'application/x-shockwave-flash',
   'txt' => 'text/plain', 'rtf' => 'application/rtf', 
   'tex' => 'application/x-tex', 'dvi' => 'application/x-dvi',
+  'odt' => 'application/vnd.oasis.opendocument.text',
+  'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+  'odp' => 'application/vnd.oasis.opendocument.presentation',
+  'kml' => 'application/vnd.google-earth.kml+xml',
+  'kmz' => 'application/vnd.google-earth.kmz',
   '' => 'text/plain'));
 
 SDV($UploadMaxSize,50000);
@@ -57,7 +62,8 @@ SDV($UploadPrefixFmt,'/$Group');
 SDV($UploadFileFmt,"$UploadDir$UploadPrefixFmt");
 $v = preg_replace('#^/(.*/)#', '', $UploadDir);
 SDV($UploadUrlFmt,preg_replace('#/[^/]*$#', "/$v", $PubDirUrl, 1));
-SDV($LinkUploadCreateFmt, "<a class='createlinktext' href='\$LinkUpload'>\$LinkText</a><a class='createlink' href='\$LinkUpload'>&nbsp;&Delta;</a>");
+SDV($LinkUploadCreateFmt, "<a rel='nofollow' class='createlinktext' href='\$LinkUpload'>\$LinkText</a><a rel='nofollow' class='createlink' href='\$LinkUpload'>&nbsp;&Delta;</a>");
+SDVA($ActionTitleFmt, array('upload' => '| $[Attach]'));
 
 SDV($PageUploadFmt,array("
   <div id='wikiupload'>
@@ -89,6 +95,7 @@ XLSDV('en',array(
 SDV($PageAttributes['passwdupload'],'$[Set new upload password:]');
 SDV($DefaultPasswords['upload'],'*');
 SDV($AuthCascade['upload'], 'read');
+SDV($FmtPV['$PasswdUpload'], 'PasswdVar($pn, "upload")');
 
 Markup('attachlist', 'directives', 
   '/\\(:attachlist\\s*(.*?):\\)/ei',
@@ -101,20 +108,23 @@ SDVA($HandleActions, array('upload' => 'HandleUpload',
   'postupload' => 'HandlePostUpload',
   'download' => 'HandleDownload'));
 SDVA($HandleAuth, array('upload' => 'upload',
-  'postupload' => 'upload',
   'download' => 'read'));
+SDV($HandleAuth['postupload'], $HandleAuth['upload']);
 SDV($UploadVerifyFunction, 'UploadVerifyBasic');
 
 function MakeUploadName($pagename,$x) {
-  global $UploadNameChars;
+  global $UploadNameChars, $MakeUploadNamePatterns;
   SDV($UploadNameChars, "-\\w. ");
-  $x = preg_replace("/[^$UploadNameChars]/", '', $x);
-  $x = preg_replace('/\\.[^.]*$/e', "strtolower('$0')", $x);
-  $x = preg_replace('/^[^[:alnum:]]+/', '', $x);
-  return preg_replace('/[^[:alnum:]_]+$/', '', $x);
+  SDV($MakeUploadNamePatterns, array(
+    "/[^$UploadNameChars]/" => '',
+    '/\\.[^.]*$/e' => 'strtolower("$0")',
+    '/^[^[:alnum:]_]+/' => '',
+    '/[^[:alnum:]_]+$/' => ''));
+   return preg_replace(array_keys($MakeUploadNamePatterns),
+            array_values($MakeUploadNamePatterns), $x);
 }
 
-function LinkUpload($pagename, $imap, $path, $title, $txt, $fmt=NULL) {
+function LinkUpload($pagename, $imap, $path, $alt, $txt, $fmt=NULL) {
   global $FmtV, $UploadFileFmt, $LinkUploadCreateFmt, $UploadUrlFmt,
     $UploadPrefixFmt, $EnableDirectDownload;
   if (preg_match('!^(.*)/([^/]+)$!', $path, $match)) {
@@ -132,15 +142,26 @@ function LinkUpload($pagename, $imap, $path, $title, $txt, $fmt=NULL) {
                             ? "$UploadUrlFmt$UploadPrefixFmt/$upname"
                             : "{\$PageUrl}?action=download&amp;upname=$upname",
                           $pagename));
-  return LinkIMap($pagename, $imap, $path, $title, $txt, $fmt);
+  return LinkIMap($pagename, $imap, $path, $alt, $txt, $fmt);
+}
+
+# Authenticate group downloads with the group password
+function UploadAuth($pagename, $auth, $cache=0){
+  global $GroupAttributesFmt, $EnableUploadGroupAuth;
+  if (IsEnabled($EnableUploadGroupAuth,0)){
+    SDV($GroupAttributesFmt,'$Group/GroupAttributes');
+    $pn_upload = FmtPageName($GroupAttributesFmt, $pagename);
+  } else $pn_upload = $pagename;
+  $page = RetrieveAuthPage($pn_upload, $auth, true, READPAGE_CURRENT);
+  if(!$page) Abort("?No '$auth' permissions for $pagename");
+  if($cache) PCache($pn_upload,$page);
+  return true;
 }
 
 function HandleUpload($pagename, $auth = 'upload') {
   global $FmtV,$UploadExtMax,
     $HandleUploadFmt,$PageStartFmt,$PageEndFmt,$PageUploadFmt;
-  $page = RetrieveAuthPage($pagename, $auth, true, READPAGE_CURRENT);
-  if (!$page) Abort("?cannot upload to $pagename");
-  PCache($pagename,$page);
+  UploadAuth($pagename, $auth, 1);
   $FmtV['$UploadName'] = MakeUploadName($pagename,@$_REQUEST['upname']);
   $upresult = htmlspecialchars(@$_REQUEST['upresult']);
   $uprname = htmlspecialchars(@$_REQUEST['uprname']);
@@ -155,8 +176,7 @@ function HandleUpload($pagename, $auth = 'upload') {
 function HandleDownload($pagename, $auth = 'read') {
   global $UploadFileFmt, $UploadExts, $DownloadDisposition;
   SDV($DownloadDisposition, "inline");
-  $page = RetrieveAuthPage($pagename, $auth, true, READPAGE_CURRENT);
-  if (!$page) Abort("?cannot read $pagename");
+  UploadAuth($pagename, $auth);
   $upname = MakeUploadName($pagename, @$_REQUEST['upname']);
   $filepath = FmtPageName("$UploadFileFmt/$upname", $pagename);
   if (!$upname || !file_exists($filepath)) {
@@ -168,20 +188,19 @@ function HandleDownload($pagename, $auth = 'read') {
   if ($UploadExts[@$match[1]]) 
     header("Content-Type: {$UploadExts[@$match[1]]}");
   header("Content-Length: ".filesize($filepath));
-  header("Content-disposition: $DownloadDisposition; filename=$upname");
+  header("Content-disposition: $DownloadDisposition; filename=\"$upname\"");
   $fp = fopen($filepath, "r");
   if ($fp) {
     while (!feof($fp)) echo fread($fp, 4096);
     fclose($fp);
   }
   exit();
-}  
- 
+}
+
 function HandlePostUpload($pagename, $auth = 'upload') {
   global $UploadVerifyFunction, $UploadFileFmt, $LastModFile, 
-    $EnableUploadVersions, $Now;
-  $page = RetrieveAuthPage($pagename, $auth, true, READPAGE_CURRENT);
-  if (!$page) Abort("?cannot upload to $pagename");
+    $EnableUploadVersions, $Now, $RecentUploadsFmt, $FmtV;
+  UploadAuth($pagename, $auth);
   $uploadfile = $_FILES['uploadfile'];
   $upname = $_REQUEST['upname'];
   if ($upname=='') $upname=$uploadfile['name'];
@@ -200,6 +219,11 @@ function HandlePostUpload($pagename, $auth = 'upload') {
     fixperms($filepath,0444);
     if ($LastModFile) { touch($LastModFile); fixperms($LastModFile); }
     $result = "upresult=success";
+    if (IsEnabled($RecentUploadsFmt, 0)) {
+      $FmtV['$upname'] = $upname;
+      $FmtV['$upsize'] = $uploadfile['size'];
+      PostRecentChanges($pagename, '', '', $RecentUploadsFmt);
+    }
   }
   Redirect($pagename,"{\$PageUrl}?action=upload&uprname=$upname&$result");
 }
@@ -277,7 +301,7 @@ function FmtUploadList($pagename, $args) {
     $name = PUE("$uploadurl$file");
     $stat = stat("$uploaddir/$file");
     if ($EnableUploadOverwrite) 
-      $overwrite = FmtPageName("<a class='createlink'
+      $overwrite = FmtPageName("<a rel='nofollow' class='createlink'
         href='\$PageUrl?action=upload&amp;upname=$file'>&nbsp;&Delta;</a>", 
         $pagename);
     $out[] = "<li> <a href='$name'>$file</a>$overwrite ... ".
@@ -295,11 +319,9 @@ function AttachExist($pagename) {
   $count = 0;
   $dirp = @opendir($uploaddir);
   if ($dirp) {
-    while (($file = readdir($dirp)) !== false) 
+    while (($file = readdir($dirp)) !== false)
       if ($file{0} != '.') $count++;
     closedir($dirp);
   }
   return $count;
 }
-
-

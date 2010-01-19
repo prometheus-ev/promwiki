@@ -1,5 +1,5 @@
 <?php if (!defined('PmWiki')) exit();
-/*  Copyright 2004-2006 Patrick R. Michaud (pmichaud@pobox.com)
+/*  Copyright 2004-2009 Patrick R. Michaud (pmichaud@pobox.com)
     This file is part of PmWiki; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License, or
@@ -68,6 +68,8 @@ if (IsEnabled($EnableStdWikiStyles,1)) {
   SDV($WikiStyle['cframe'], array(
     'class' => 'frame', 'margin-left' => 'auto', 'margin-right' => 'auto',
     'width' => '200px', 'apply' => 'block', 'text-align' => 'center'));
+  ##  preformatted text sections
+  SDV($WikiStyle['pre'], array('apply' => 'block', 'white-space' => 'pre'));
   SDV($WikiStyle['sidehead'], array('apply' => 'block', 'class' => 'sidehead'));
 }
 
@@ -97,6 +99,8 @@ function ApplyStyles($x) {
     $WikiStyleAttr, $WikiStyleCSS, $WikiStyleApply, $BlockPattern,
     $WikiStyleTag, $imgTag, $aTag, $spanTag, $WikiStyleAttrPrefix;
   $wt = @$WikiStyleTag; $ns = $WikiStyleAttrPrefix; $ws = '';
+  $x = preg_replace("/\\b(href|src)=(['\"]?)[^$UrlExcludeChars]+\\2/e", 
+                    "Keep(PSS('$0'))", $x);
   $x = preg_replace("/\\bhttps?:[^$UrlExcludeChars]+/e", "Keep('$0')", $x);
   $parts = preg_split("/($WikiStylePattern)/",$x,-1,PREG_SPLIT_DELIM_CAPTURE);
   $parts[] = NULL;
@@ -119,7 +123,8 @@ function ApplyStyles($x) {
         else {
           $c = @$style['class'];
           $style=array_merge($style,(array)$WikiStyle[$m[1]]);
-          if ($c) $style['class'] = $c . ' ' . $style['class'];
+          if ($c && !preg_match("/(^| )$c( |$)/", $style['class']) )
+            $style['class'] = $c . ' ' . $style['class'];
         }
       }
       if (@$style['define']) {
