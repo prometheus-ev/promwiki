@@ -1194,9 +1194,7 @@ function TextSection($text, $sections, $args = NULL) {
   if (!$dots && !$b) $bb = $npat;
   if ($aa) {
     $pos = strpos($text, "[[#$aa]]");  if ($pos === false) return false;
-    if (@$args['anchors']) 
-      while ($pos > 0 && $text[$pos-1] != "\n") $pos--;
-    else $pos += strlen("[[#$aa]]");
+    $pos += strlen("[[#$aa]]");
     $text = substr($text, $pos);
   }
   if ($bb)
