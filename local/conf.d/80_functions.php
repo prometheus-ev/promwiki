@@ -1,6 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
-## Automatic Change Summary
 array_unshift($EditFunctions, 'ProvideDefaultSummary');
+
 function ProvideDefaultSummary($pagename, &$page, &$new) {
   global $ChangeSummary, $DiffFunction;
 

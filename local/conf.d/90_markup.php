@@ -1,8 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
-## Tags/Categories directive
 Markup('tags', 'directives', '/\\(:tags (.*?):\\)/e', "MakeTags('$1')");
 
-## Include uploaded files (attachments)
 Markup('includeupload', 'directives',
   '/\(:includeupload\s+(.+)\s*:\)/e',
   "is_readable(\"$FarmD/uploads/$1\")
