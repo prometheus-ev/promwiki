@@ -116,6 +116,10 @@ pre {
   border-bottom:    1px dotted black;
 }
 
+code.escaped {
+  white-space: normal !important;
+}
+
 /*.vspace {
   display:          block;
   height:           1.5em;

@@ -174,6 +174,7 @@ $HTMLDoctypeFmt =
   <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'><head>\n";
 $HTMLStylesFmt['pmwiki'] = "
   ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
+  code.escaped { white-space: nowrap; }
   .vspace { margin-top:1.33em; }
   .indent { margin-left:40px; }
   .outdent { margin-left:40px; text-indent:-40px; }
