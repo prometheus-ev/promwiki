@@ -11,17 +11,30 @@
 </head>
 <body>
 <!--PageHeaderFmt-->
-  <div id='wikilogo'><a href='$ScriptUrl'><img src='$PageLogoUrl'
-    alt='$WikiTitle' border='0' /></a></div>
+  <div id='wikilogo'>
+    <a href='$ScriptUrl'><img src='$PageLogoUrl' alt='$WikiTitle' border='0' /></a>
+  </div>
   <div id='wikihead'>
-  <form action='$ScriptUrl'>
-    <a href='$ScriptUrl/$[$Group/RecentChanges]'
-      accesskey='$[ak_recentchanges]'>$[Recent Changes]</a> -
-    <input type='hidden' name='n' value='$FullName' />
-    <input type='hidden' name='action' value='search' />
-    <a href='$ScriptUrl/$[$SiteGroup/Search]'>$[Search]</a>:
-    <input class='searchbox' type='text' name='q' value='' />
-    <input class='searchbutton' type='submit' value='$[Go]' /></form></div>
+    <form action='$ScriptUrl'>
+      <input type='hidden' name='n' value='$FullName' />
+      <input type='hidden' name='action' value='search' />
+      <a href='$ScriptUrl/$[$SiteGroup/Search]'>$[Search]</a>:
+      <input class='searchbox' type='text' name='q' value='' />
+      <input class='searchbutton' type='submit' value='$[Go]' />
+    </form>
+    <form class="newpage" action='$ScriptUrl' method="post">
+      <input type='hidden' name='n' value='$FullName' />
+      <input type='hidden' name="action" value="new">
+      <input name="base" value="$Group.Inhalt" type="hidden">
+      <input name="template" value="" type="hidden">
+      Neue Seite:
+      <input class="newpagetext" name="name" value="" type="text">
+      <input class="newpagebutton" value="Los" type="submit">
+    </form>
+    <br />
+    $[Recent Changes]:
+    <a href='$ScriptUrl/$[Site/AllRecentChanges]'>alle</a> | <a href='$ScriptUrl/$[$Group/RecentChanges]'>$Group</a>
+  </div>
 <!--/PageHeaderFmt-->
   <table id='wikimid' width='100%' cellspacing='0' cellpadding='0'><tr>
 <!--PageLeftFmt-->

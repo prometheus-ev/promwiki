@@ -1,6 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
 $WikiTitle   = 'prometheus wiki';
-$Skin        = 'prom2';
+$Skin        = 'prom';
 $PageLogoUrl = "$PubDirUrl/skins/$Skin/logo_prom.png";
 
 $DefaultGroup = 'Prometheus';
