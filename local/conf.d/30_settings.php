@@ -1,4 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
+$CookiePrefix = 'promwiki_';
+
 $EnableRelativePageLinks  = 0;
 $EnablePageListProtect    = 0;
 $EnableDrafts             = 1;
