@@ -1,4 +1,4 @@
-# This file is scripts/.htaccess -- the default distribution contains this
+# This file is tmp/.htaccess -- the default distribution contains this
 # file to prevent cookbook/ scripts from being accessed directly by browsers
 # (this is a potential, albeit very unlikely, security hole).
 #
