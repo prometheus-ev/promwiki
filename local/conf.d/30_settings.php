@@ -1,6 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
 $CookiePrefix = 'promwiki_';
-session_save_path($BaseUrl.'/tmp');
+session_save_path($FarmD.'/tmp');
 
 $EnableRelativePageLinks  = 0;
 $EnablePageListProtect    = 0;
