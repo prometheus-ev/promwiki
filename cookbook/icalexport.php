@@ -120,9 +120,9 @@ function icalexportfct($pagename) {
 	$endi18n = FmtPageName("$[End]", $pagename);
 	$descriptioni18n = FmtPageName("$[Description]", $pagename);
 
-	$out[] = "BEGIN:VCALENDAR\n";
-	$out[] = "VERSION:2.0\n";
-	$out[] = "X-WR-CALNAME:".$ICalCalendarTitle."\n";
+	$out[] = "BEGIN:VCALENDAR\r\n";
+	$out[] = "VERSION:2.0\r\n";
+	$out[] = "X-WR-CALNAME:".$ICalCalendarTitle."\r\n";
 
 	foreach ($pagelist as $pagename) {
 		// we need only search events on wiki sides belonging to group $ICalCalendarGroup
@@ -151,54 +151,54 @@ function icalexportfct($pagename) {
 				$eventDescription = str_replace("\\", "", $eventDescription[1]);
 
 				$temp = explode(".", $pagename);
-        $out[] = "BEGIN:VEVENT\n";
+        $out[] = "BEGIN:VEVENT\r\n";
 
         if (preg_match("/^ACAL/", $temp[1])) {
           $temp[1] = str_replace("ACAL", date("Y", $acalYear), $temp[1]);
-          $out[] = "RRULE:FREQ=YEARLY;INTERVAL=1\n";
+          $out[] = "RRULE:FREQ=YEARLY;INTERVAL=1\r\n";
         }
 
 				if ($eventBegin && $eventEnd) {
 					$beginn = str_replace(":", "", $eventBegin);
 					$ende = str_replace(":", "", $eventEnd);
-					$out[] = "DTSTART;TZID=".$ICalTimeZone.":".$temp[1]."T".$beginn."00\n";
-					$out[] = "DTEND;TZID=".$ICalTimeZone.":".$temp[1]."T".$ende."00\n";
+					$out[] = "DTSTART;TZID=".$ICalTimeZone.":".$temp[1]."T".$beginn."00\r\n";
+					$out[] = "DTEND;TZID=".$ICalTimeZone.":".$temp[1]."T".$ende."00\r\n";
 				} else {
 					//we say it is a full day event and set the end to the next day
 					// TODO:1 check if date exists and wrap to next month if not 
 					$nextDay = $temp[1] + 1;
-					$out[] = "DTSTART;VALUE=DATE:".$temp[1]."\n";
-					$out[] = "DTEND;VALUE=DATE:".$nextDay."\n";
+					$out[] = "DTSTART;VALUE=DATE:".$temp[1]."\r\n";
+					$out[] = "DTEND;VALUE=DATE:".$nextDay."\r\n";
 				}
 
 				if ($eventLocation)
-					$out[] = "LOCATION:".$eventLocation."\n";
+					$out[] = "LOCATION:".$eventLocation."\r\n";
 
 				$title = MarkupToHTML($pagename, $eventTitle);
 				$title = chop(preg_replace("/<.*?>/s", "", $title));
-				$out[] = "SUMMARY:".$title."\n";
+				$out[] = "SUMMARY:".$title."\r\n";
 
 				//Every event needs a clear ID in the iCal protokoll
-				$out[] = "UID:".$pagename."-".$eventNumber."-@".$_SERVER['HTTP_HOST']."\n";
+				$out[] = "UID:".$pagename."-".$eventNumber."-@".$_SERVER['HTTP_HOST']."\r\n";
 
 				if ($eventDescription) {
 					$infos = MarkupToHTML($pagename, $eventDescription);
 					$infos = preg_replace("/<.*?>/s", "", $infos);
 					$infos = chop($infos);
-					$infos = preg_replace("/\n/s", "\\n", $infos);
+					$infos = preg_replace("/\n/s", "\\r\\n", $infos);
 					//Seperates the following URL by two lines
-					$infos = $infos."\\n\\n";
+					$infos = $infos."\\r\\n\\r\\n";
 				} else
 					$infos = "";
-				$out[] = "DESCRIPTION:".$infos.$ScriptUrl."/".$pagename."\n";
+				$out[] = "DESCRIPTION:".$infos.$ScriptUrl."/".$pagename."\r\n";
 
-				$out[] = "END:VEVENT\n";
+				$out[] = "END:VEVENT\r\n";
 
 			}
 		}
 	}
 
-	$out[] = "END:VCALENDAR\n";
+	$out[] = "END:VCALENDAR\r\n";
 	$pagetext = implode("", $out);
 
 	//debugging help: prints out the written iCal file on the wikipage
