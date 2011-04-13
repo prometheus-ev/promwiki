@@ -293,7 +293,7 @@ php stinks
 	if (!is_int("$y"))
 		return $PmCaltyear;
 */
-	if(ereg("^[0-9]+$", "$y")) $y = (int)$y;
+	if(preg_match("/^[0-9]+$/", "$y")) $y = (int)$y;
 	if (!is_int($y))
 		return $PmCaltyear;
 	return $y;
