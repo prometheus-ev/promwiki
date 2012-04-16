@@ -138,8 +138,8 @@ function icalexportfct($pagename) {
 
 		foreach ($calenderEvents as $eventNumber => $event) {
 			if (preg_match("/^(?:!!)(?!!)\s?(.*)/m", $event, $eventTitle)) {
-				preg_match("/^(?:".$endi18n.":)\s*([0-9]{2}:[0-9]{2}).*$/m", $event, $eventEnd);
-				preg_match("/^(?:".$begini18n.":)\s*([0-9]{2}:[0-9]{2}).*$/m", $event, $eventBegin);
+				preg_match("/^(?:".$endi18n.":)\s*([0-9]{1,2}:[0-9]{1,2}).*$/m", $event, $eventEnd);
+				preg_match("/^(?:".$begini18n.":)\s*([0-9]{1,2}:[0-9]{1,2}).*$/m", $event, $eventBegin);
 				preg_match("/^(?:".$locationi18n.":)\s*(.*)$/m", $event, $eventLocation);
 				preg_match("/^(?:".$descriptioni18n.":)\s*(.*)$/ms", $event, $eventDescription);
 
@@ -159,6 +159,11 @@ function icalexportfct($pagename) {
         }
 
 				if ($eventBegin && $eventEnd) {
+					$eventBegin = preg_replace('/^([0-9]:)/', '0$1', $eventBegin);
+					$eventBegin = preg_replace('/:([0-9])$/', ':0$1', $eventBegin);
+					$eventEnd = preg_replace('/^([0-9]:)/', '0$1', $eventEnd);
+					$eventEnd = preg_replace('/:([0-9])$/', ':0$1', $eventEnd);
+
 					$beginn = str_replace(":", "", $eventBegin);
 					$ende = str_replace(":", "", $eventEnd);
 					$out[] = "DTSTART;TZID=".$ICalTimeZone.":".$temp[1]."T".$beginn."00\r\n";
