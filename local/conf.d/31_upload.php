@@ -1,7 +1,7 @@
 <?php if (!defined('PmWiki')) exit();
 $EnableUpload = 1;
 
-$UploadMaxSize = 1000000;
+$UploadMaxSize = 10000000;
 
 $UploadExts['cfg']    = 'text/plain';
 $UploadExts['conf']   = 'text/plain';
