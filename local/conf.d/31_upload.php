@@ -8,6 +8,7 @@ $UploadExts['conf']   = 'text/plain';
 $UploadExts['diff']   = 'text/plain';
 $UploadExts['lang']   = 'text/plain';
 $UploadExts['mpatch'] = 'text/plain';
+$UploadExts['patch']  = 'text/plain';
 $UploadExts['pkg']    = 'text/plain';
 $UploadExts['rb']     = 'text/plain';
 $UploadExts['sample'] = 'text/plain';
